@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* -----------------------------------
+   Branding Colours
+----------------------------------- */
+:root {
+    /* Digital Preservation Palette */
+    --brand-primary: #9FC8C6;
+    --brand-secondary:  #fce8c3;
+    --brand-tertiary: #91c9ce; 
+    /* --brand-primary: #7ad2ce; */
+}
+
+
+
+/* Ensure the container elements occupy full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+p, .form-check-label, button {
+  font-size: 14pt;
+  
+}
+
+.btn-primary {
+  background-color: var(--brand-primary)!important;
+  border-color: var(--brand-primary);
+  color: black;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background-color: #467270!important;
+  border-color: #467270;
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-secondary{
+  background-color: var(--brand-secondary)!important;
+  border-color: var(--brand-secondary);
+  color: black;
+  font-weight: 700;
+}
+
+.btn-tertiary{
+  background-color: var(--brand-tertiary)!important;
+  border-color: var(--brand-tertiary);
+  color: black;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 26pt!important
+}
+
+.hero {
+  background-color: #FBFAFA;
+}
+
+.score {
+  font-size: 20pt;
+}
+
+.full-page-bg {
+  /* Scale the image proportionally to cover the full viewport */
+  background-size: cover;
+  
+  /* Lock the image in place so text scrolls smoothly over it */
+  background-attachment: fixed;
+  
+  /* Keep the focus centered horizontally and vertically */
+  background-position: center center;
+  
+  /* Prevent the browser from repeating tiles of the image */
+  background-repeat: no-repeat;
+  
+  min-height: 100vh;
+}
+
+/* Define page-specific image assignments */
+.home-page {
+  background-image: url('images/home.png');
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; 
+}
+
+.beginning-page {
+  background-image: url('images/beginning.png');
+}
+
+.bitrot-page {
+  background-image: url('images/bitrot.png');
+}
+
+/* #choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  width: 300px;
+} */
+
+#choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.card-header {
+  background-color: var(--brand-secondary);
+  /* color: white */
+}
+
+.bg-primary {
+  background-color: var(--brand-tertiary)!important;
+  color: black
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: #6c757d!important;
+    border-color: #6c757d;
+}
