@@ -8,20 +8,19 @@
     --brand-primary: #9FC8C6;
     --brand-secondary:  #fce8c3;
     --brand-tertiary: #91c9ce; 
-    /* --brand-primary: #7ad2ce; */
+    --brand-hover: #467270;
+    --brand-success: #154A4A;
 }
-
-
-
 /* Ensure the container elements occupy full height */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif !important;
+ 
 }
 
-p, .form-check-label, button {
+p, .form-check-label, button, .modal {
   font-size: 14pt;
   
 }
@@ -34,8 +33,8 @@ p, .form-check-label, button {
 }
 
 .btn-primary:hover {
-  background-color: #467270!important;
-  border-color: #467270;
+  background-color: var(--brand-hover)!important;
+  border-color: var(--brand-hover);
   color: #fff;
   font-weight: 700;
 }
@@ -90,21 +89,6 @@ h2 {
   align-items: center; 
 }
 
-.beginning-page {
-  background-image: url('images/beginning.png');
-}
-
-.bitrot-page {
-  background-image: url('images/bitrot.png');
-}
-
-/* #choices {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; 
-  width: 300px;
-} */
-
 #choices {
   display: flex;
   flex-direction: column;
@@ -125,4 +109,58 @@ h2 {
     color: #fff;
     background-color: #6c757d!important;
     border-color: #6c757d;
+}
+
+.btn-success {
+  background-color: var(--brand-success)!important; 
+  border-color: var(--brand-success)
+}
+
+.selection {
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 8px solid #E8D18A;
+}
+
+
+/* -----------------------------------
+  Score Modal
+----------------------------------- */
+.response-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 8px solid #E8D18A;
+}
+
+.response-text {
+  overflow-wrap: anywhere;
+}
+
+.response-points {
+  font-weight: 700;
+  white-space: nowrap;
+  color: #198754;
+  font-size: 14pt;
+}
+
+.response-points.negative {
+  color: #dc3545;
+}
+
+
+.card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+.card img {
+  max-width: 100%;
+  height: auto;
 }
