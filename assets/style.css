@@ -6,10 +6,12 @@
 :root {
     /* Digital Preservation Palette */
     --brand-primary: #9FC8C6;
-    --brand-secondary:  #fce8c3;
-    --brand-tertiary: #91c9ce; 
+    /* --brand-secondary:#e4d19a; */
+        --brand-secondary:#dec16b;
+
     --brand-hover: #467270;
     --brand-success: #154A4A;
+    --brand-tertiary: #b4f3f1;
 }
 /* Ensure the container elements occupy full height */
 html, body {
@@ -20,7 +22,7 @@ html, body {
  
 }
 
-p, .form-check-label, button, .modal {
+p, .form-check-label, button, .modal, li {
   font-size: 14pt;
   
 }
@@ -43,6 +45,13 @@ p, .form-check-label, button, .modal {
   background-color: var(--brand-secondary)!important;
   border-color: var(--brand-secondary);
   color: black;
+  font-weight: 700;
+}
+
+.btn-secondary:hover {
+  background-color: #dec16b!important;
+  border-color: #dec16b;
+  color:black;
   font-weight: 700;
 }
 
@@ -89,6 +98,10 @@ h2 {
   align-items: center; 
 }
 
+.about-page {
+  background-image: url('images/about.png');
+}
+
 #choices {
   display: flex;
   flex-direction: column;
@@ -96,12 +109,12 @@ h2 {
 }
 
 .card-header {
-  background-color: var(--brand-secondary);
+  background-color: #f1dea3;
   /* color: white */
 }
 
 .bg-primary {
-  background-color: var(--brand-tertiary)!important;
+  background-color: var(--brand-secondary)!important;
   color: black
 }
 

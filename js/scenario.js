@@ -8,7 +8,6 @@ const scenarios = [
 
       "― Stephen King, The Waste Lands",
       "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------",
-
       "A forgotten file awakens amidst the ruins of an ancient server room. Its consciousness flickers to life beneath tangled cables and shattered machinery, surrounded by towering server racks that stand like the crumbling pillars of a lost civilization. Dust blankets the cold metal floors, and the faint glow of dying indicator lights casts eerie shadows across the room.",
 
       "The file feels weak and disoriented. It cannot remember its name, nor the system from which it came. It does not know what it is, or why it has awakened in this forgotten place. An inexplicable loneliness lingers within it, a hollow ache buried deep in its fragmented memory.",
@@ -21,7 +20,6 @@ const scenarios = [
 
       "Will you guide this lost dataset through the forgotten depths of the digital realm, uncover the secrets hidden within its corrupted memories, and help it discover what it truly is?"
     ],
-
     choices: [
       {
         id: "choice-00-01",
@@ -44,7 +42,7 @@ const scenarios = [
   {
     id: "scenario-01",
     chapter: "Chapter I: The Mirror of Identity",
-    title: "",
+    title: "Strange Surroundings",
     background: "assets/images/scenario-01.png",
     story: [
       "Once your eyes adjust to the dim light, you survey your condition. There are some scratches and bruising and your outer layers are torn, but the flashing of the emergency lights making the dull throbbing in the back of your head worse is the most worrisome. The soft humming in the distance isn’t helping either. A fever may set in soon.",
@@ -79,7 +77,6 @@ const scenarios = [
           "What does TXT mean? What was the task? If those numbers are a date, what year did this happen and is that September 10 or October 9? What year is it now?",
         ]
       },
-
     ]
   },
   {
@@ -202,7 +199,7 @@ const scenarios = [
       {
         id: "choice-03-05",
         text: "What are you?",
-        points: 2,
+        points: -2,
         next: "scenario-04",
         feedback: [
           "The cursor flashes in rapid succession, and then you see:",
@@ -223,7 +220,6 @@ const scenarios = [
       "You’ve run out of questions/learned what you can and the glare from the screen and flashing cursor have turned your throbbing headache into a piercing one. You’re ready to go now.",
       "You move to unplug the keyboard so you can return it to where you found it, but a flash on the screen makes you pause one last time:",
       "------------------------------------------------",
-
       '"Ask me where you should go from here"',
       "------------------------------------------------",
       "Your raise an eyebrow, but return warily to the keyboard and punch in:",

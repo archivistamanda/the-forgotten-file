@@ -24,15 +24,146 @@ const profileScoreEl = document.getElementById("profile-score");
 window.collectedMemories = [];
 
 // ==========================================
+// BACKGROUND MUSIC CONFIGURATION
+// ==========================================
+
+// Music for the opening HTML home page.
+const homeMusic = "../assets/audio/home.mp3";
+
+// Music for individual scenarios.
+const scenarioMusic = {
+  "scenario-00": "audio/beginning.mp3",
+  "scenario-01": "audio/suspense.mp3",
+  "scenario-02": "audio/emotional.mp3",
+  "scenario-03": "audio/questions.mp3",
+  "scenario-04": "audio/emotional.mp3",
+  "scenario-05": "audio/suspense.mp3",
+  "scenario-win": "audio/victory.mp3",
+  "scenario-lose": "audio/defeat.mp3"
+};
+
+const backgroundMusic = new Audio();
+
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.3;
+
+let currentMusicSource = "";
+let musicEnabled = false;
+
+// Play a track without restarting it unnecessarily.
+function playMusic(musicFile) {
+  if (!musicFile) return;
+
+  if (currentMusicSource === musicFile) {
+    if (musicEnabled && backgroundMusic.paused) {
+      backgroundMusic.play().catch(error => {
+        console.log("Music playback requires interaction:", error);
+      });
+    }
+    return;
+  }
+
+  currentMusicSource = musicFile;
+
+  backgroundMusic.pause();
+  backgroundMusic.src = musicFile;
+  backgroundMusic.currentTime = 0;
+
+  if (musicEnabled) {
+    backgroundMusic.play().catch(error => {
+      console.log("Music playback requires interaction:", error);
+    });
+  }
+}
+
+// Play the opening page's music.
+function playHomeMusic() {
+  playMusic(homeMusic);
+}
+
+// Play music for a scenario.
+function playScenarioMusic(scenarioId) {
+  playMusic(scenarioMusic[scenarioId]);
+}
+// ==========================================
+// MUSIC ON/OFF BUTTON
+// ==========================================
+function updateMusicButton() {
+  const musicButton = document.getElementById("music-toggle");
+
+  if (!musicButton) return;
+
+  musicButton.textContent = musicEnabled
+    ? "🔊 Music On"
+    : "🔇 Music Off — Click to Enable";
+
+  musicButton.setAttribute(
+    "aria-pressed",
+    String(musicEnabled)
+  );
+}
+
+function initializeMusicToggle() {
+  const musicButton = document.getElementById("music-toggle");
+
+  if (!musicButton) {
+    console.warn("Music toggle button not found.");
+    return;
+  }
+
+  if (musicButton.dataset.initialized === "true") {
+    updateMusicButton();
+    return;
+  }
+
+  musicButton.dataset.initialized = "true";
+  updateMusicButton();
+
+  musicButton.addEventListener("click", async () => {
+    if (!musicEnabled) {
+      musicEnabled = true;
+
+      try {
+        // Load the Landing page music if no track is selected.
+        if (!backgroundMusic.src || !currentMusicSource) {
+          playHomeMusic();
+        }
+
+        // Start playback directly from the user's click.
+        await backgroundMusic.play();
+
+        updateMusicButton();
+      } catch (error) {
+        musicEnabled = false;
+        updateMusicButton();
+
+        console.error("Unable to start music:", error);
+      }
+
+      return;
+    }
+
+    // Turn music off.
+    musicEnabled = false;
+    backgroundMusic.pause();
+    updateMusicButton();
+  });
+}
+// ==========================================
 // DISPLAY SCENARIO
 // ==========================================
 function showScenario(id) {
   const scenario = scenarios.find(item => item.id === id);
-  console.log("Showing scenario:", id);
+
   if (!scenario) {
     console.error(`Scenario not found: ${id}`);
     return;
   }
+
+  // Play the music assigned to this scenario.
+  playScenarioMusic(id);
+
+  console.log("Showing scenario:", id);
 
   currentId = id;
   answered = false;
@@ -413,7 +544,7 @@ function showResultModal(choice, scenarioId, playerAnswer = null) {
 
   answerContainer.append(answerLabel, answerText);
   modalBody.appendChild(answerContainer);
-  
+
   // Show feedback.
   const feedback = Array.isArray(choice.feedback)
     ? choice.feedback
@@ -766,12 +897,14 @@ function restartGame() {
   showScenario(currentId);
 }
 
-// ==========================================
-// INITIALIZE GAME AFTER MODALS LOAD
-// ==========================================
 function initializeGame() {
-  // Home screen
+  // Initialize music controls.
+  initializeMusicToggle();
+
+  // Landing page: play the landing music.
   const journeyButton = document.getElementById("journey");
+  const homePage = document.getElementById("home");
+  const scenarioPage = document.getElementById("scenario");
 
   if (journeyButton) {
     journeyButton.addEventListener("click", () => {
@@ -784,31 +917,41 @@ function initializeGame() {
       localStorage.setItem("health", "0");
       localStorage.setItem("scenarioId", "scenario-00");
 
-      document.getElementById("home")?.remove();
-      document.getElementById("scenario")
-        ?.classList.remove("d-none");
+      homePage?.remove();
+      scenarioPage?.classList.remove("d-none");
 
       updateScoreDisplay();
+
+      // Switch from landing music to scenario-00 music.
       showScenario("scenario-00");
     }, { once: true });
+
+    // Do not display scenario-00 until Start the Journey is clicked.
+    playHomeMusic();
+  } else {
+    // If the landing page is absent, display the current scenario.
+    updateScoreDisplay();
+    showScenario(currentId);
   }
 
-  // Initialize the score and memory modals after hmtl pages has loaded.
+  // Initialize the existing modals.
   initializeMemoryProfile();
   initializeScoreModal();
 
-  // Update score and show the initial scenario.
   updateScoreDisplay();
-  showScenario(currentId);
 }
 
 // ==========================================
 // START AFTER THE PAGE LOADS
 // ==========================================
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", loadModals, {
-    once: true
-  });
+  document.addEventListener("DOMContentLoaded", () => {
+    loadModals();
+    initializeMusicToggle();
+    playHomeMusic();
+  }, { once: true });
 } else {
   loadModals();
+  initializeMusicToggle();
+  playHomeMusic();
 }
