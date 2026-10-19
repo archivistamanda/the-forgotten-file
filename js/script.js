@@ -95,7 +95,7 @@ function updateMusicButton() {
 
   musicButton.textContent = musicEnabled
     ? "🔊 Music On"
-    : "🔇 Music Off — Click to Enable";
+    : "🔇 Music Off";
 
   musicButton.setAttribute(
     "aria-pressed",

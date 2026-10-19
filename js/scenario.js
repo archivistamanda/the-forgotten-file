@@ -7,7 +7,7 @@ const scenarios = [
       '"All is silent in the halls of the dead. All is forgotten in the stone halls of the dead. Behold the stairways which stand in darkness; behold the rooms of ruin. These are the halls of the dead where the spiders spin and the great circuits fall quiet, one by one."',
 
       "― Stephen King, The Waste Lands",
-      "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------",
+      "------------------------------------------------------------------------------------------------------------------------------------------------------------------",
       "A forgotten file awakens amidst the ruins of an ancient server room. Its consciousness flickers to life beneath tangled cables and shattered machinery, surrounded by towering server racks that stand like the crumbling pillars of a lost civilization. Dust blankets the cold metal floors, and the faint glow of dying indicator lights casts eerie shadows across the room.",
 
       "The file feels weak and disoriented. It cannot remember its name, nor the system from which it came. It does not know what it is, or why it has awakened in this forgotten place. An inexplicable loneliness lingers within it, a hollow ache buried deep in its fragmented memory.",

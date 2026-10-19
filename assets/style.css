@@ -4,11 +4,8 @@
    Branding Colours
 ----------------------------------- */
 :root {
-    /* Digital Preservation Palette */
     --brand-primary: #9FC8C6;
-    /* --brand-secondary:#e4d19a; */
-        --brand-secondary:#dec16b;
-
+    --brand-secondary:#dec16b;
     --brand-hover: #467270;
     --brand-success: #154A4A;
     --brand-tertiary: #b4f3f1;
@@ -102,15 +99,22 @@ h2 {
   background-image: url('images/about.png');
 }
 
+.gameplay-page {
+  background-image: url('images/gameplay.png');
+}
+
 #choices {
   display: flex;
   flex-direction: column;
   gap: 10px
 }
 
+.card {
+  border-left: solid 8px var(--brand-secondary)
+}
+
 .card-header {
-  background-color: #f1dea3;
-  /* color: white */
+  background-color: #f8f9fa;
 }
 
 .bg-primary {
