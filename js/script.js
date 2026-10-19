@@ -27,128 +27,139 @@ window.collectedMemories = [];
 // BACKGROUND MUSIC CONFIGURATION
 // ==========================================
 
-// Music for the opening HTML home page.
 const homeMusic = "../assets/audio/home.mp3";
 
-// Music for individual scenarios.
 const scenarioMusic = {
-  "scenario-00": "audio/beginning.mp3",
-  "scenario-01": "audio/suspense.mp3",
-  "scenario-02": "audio/emotional.mp3",
-  "scenario-03": "audio/questions.mp3",
-  "scenario-04": "audio/emotional.mp3",
-  "scenario-05": "audio/suspense.mp3",
-  "scenario-win": "audio/victory.mp3",
-  "scenario-lose": "audio/defeat.mp3"
+  "scenario-00": "../assets/audio/scenario-00.mp3",
+  "scenario-01": "../assets/audio/scenario-01.mp3",
+  "scenario-02": "../assets/audio/scenario-02.mp3",
+  "scenario-03": "../assets/audio/scenario-03.mp3",
+  "scenario-04": "../assets/audio/scenario-04.mp3",
+  "scenario-05": "../assets/audio/scenario-05.mp3"
 };
 
 const backgroundMusic = new Audio();
 
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.3;
+backgroundMusic.preload = "auto";
 
 let currentMusicSource = "";
 let musicEnabled = false;
 
-// Play a track without restarting it unnecessarily.
+// Play or switch tracks without automatically enabling music.
 function playMusic(musicFile) {
   if (!musicFile) return;
 
-  if (currentMusicSource === musicFile) {
-    if (musicEnabled && backgroundMusic.paused) {
-      backgroundMusic.play().catch(error => {
-        console.log("Music playback requires interaction:", error);
-      });
-    }
-    return;
-  }
+  if (currentMusicSource === musicFile) return;
 
   currentMusicSource = musicFile;
 
   backgroundMusic.pause();
   backgroundMusic.src = musicFile;
   backgroundMusic.currentTime = 0;
+  backgroundMusic.load();
 
+  // Only play if the user has enabled music.
   if (musicEnabled) {
     backgroundMusic.play().catch(error => {
-      console.log("Music playback requires interaction:", error);
+      console.error("Music playback failed:", error);
     });
   }
 }
 
-// Play the opening page's music.
 function playHomeMusic() {
   playMusic(homeMusic);
 }
 
-// Play music for a scenario.
+async function startHomeMusicAutomatically() {
+  musicEnabled = true;
+  playHomeMusic();
+
+  try {
+    await backgroundMusic.play();
+  } catch (error) {
+    // Browser may block autoplay.
+    musicEnabled = false;
+    console.log("Autoplay blocked; waiting for user interaction.");
+  }
+
+  updateMusicButton();
+}
 function playScenarioMusic(scenarioId) {
   playMusic(scenarioMusic[scenarioId]);
 }
+
 // ==========================================
 // MUSIC ON/OFF BUTTON
 // ==========================================
+
 function updateMusicButton() {
-  const musicButton = document.getElementById("music-toggle");
+  document.querySelectorAll(".music-toggle").forEach(button => {
+    button.textContent = musicEnabled
+      ? "🔊 Music On"
+      : "🔇 Music Off";
 
-  if (!musicButton) return;
-
-  musicButton.textContent = musicEnabled
-    ? "🔊 Music On"
-    : "🔇 Music Off";
-
-  musicButton.setAttribute(
-    "aria-pressed",
-    String(musicEnabled)
-  );
+    button.setAttribute(
+      "aria-pressed",
+      String(musicEnabled)
+    );
+  });
 }
 
 function initializeMusicToggle() {
-  const musicButton = document.getElementById("music-toggle");
+  const musicButtons = document.querySelectorAll(".music-toggle");
 
-  if (!musicButton) {
-    console.warn("Music toggle button not found.");
+  if (musicButtons.length === 0) {
+    console.warn("No .music-toggle buttons found.");
     return;
   }
 
-  if (musicButton.dataset.initialized === "true") {
-    updateMusicButton();
-    return;
-  }
+  musicButtons.forEach(button => {
+    // Prevent duplicate click listeners.
+    if (button.dataset.initialized === "true") return;
 
-  musicButton.dataset.initialized = "true";
-  updateMusicButton();
+    button.dataset.initialized = "true";
 
-  musicButton.addEventListener("click", async () => {
-    if (!musicEnabled) {
+    button.addEventListener("click", async () => {
+      if (musicEnabled) {
+        musicEnabled = false;
+        backgroundMusic.pause();
+        updateMusicButton();
+        return;
+      }
+
       musicEnabled = true;
 
+      // Use the track for the current screen.
+      const scenarioPage = document.getElementById("scenario");
+      const isScenarioVisible =
+        scenarioPage && !scenarioPage.classList.contains("d-none");
+
+      const musicFile = isScenarioVisible
+        ? (scenarioMusic[currentId] || homeMusic)
+        : homeMusic;
+
+      if (currentMusicSource !== musicFile) {
+        currentMusicSource = musicFile;
+        backgroundMusic.src = musicFile;
+        backgroundMusic.load();
+      }
+
       try {
-        // Load the Landing page music if no track is selected.
-        if (!backgroundMusic.src || !currentMusicSource) {
-          playHomeMusic();
-        }
-
-        // Start playback directly from the user's click.
         await backgroundMusic.play();
-
-        updateMusicButton();
       } catch (error) {
         musicEnabled = false;
-        updateMusicButton();
-
         console.error("Unable to start music:", error);
       }
 
-      return;
-    }
-
-    // Turn music off.
-    musicEnabled = false;
-    backgroundMusic.pause();
-    updateMusicButton();
+      updateMusicButton();
+    });
   });
+
+  updateMusicButton();
 }
+
 // ==========================================
 // DISPLAY SCENARIO
 // ==========================================
@@ -789,8 +800,8 @@ function renderMemoryProfile() {
     const fields = [
       ["originalName", memory.orignalName],
       ["dateCreatedByApplication", memory.dateCreatedByApplication],
-      ["format", memory.format],
-      ["version", memory.version],
+      ["formatName", memory.format],
+      ["formatVersion", memory.version],
       ["agent", memory.agent],
       ["messageDigestAlgorithm", memory.checksum_algorithm],
       ["messageDigest", memory.checksum]
@@ -944,14 +955,18 @@ function initializeGame() {
 // ==========================================
 // START AFTER THE PAGE LOADS
 // ==========================================
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
-    loadModals();
-    initializeMusicToggle();
-    playHomeMusic();
-  }, { once: true });
-} else {
-  loadModals();
+function startApplication() {
   initializeMusicToggle();
-  playHomeMusic();
+  loadModals();
+  startHomeMusicAutomatically();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    startApplication,
+    { once: true }
+  );
+} else {
+  startApplication();
 }
