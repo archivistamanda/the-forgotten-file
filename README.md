@@ -4,8 +4,7 @@
 By personifying a digital file and portraying its journey toward preservation, the story highlights the importance of context and the crucial role it plays in determining preservation pathways. It equally conveys the challenges and significance of protecting digital information for future generations. Ultimately, it reminds us that digital files have a story worth saving and that preserving our digital heritage is a shared responsibility.
 
 ## Gameplay
-[insert image]
-
+![The scenario the mirror within from chapter one ](/assets/images/scenario-screenshot.png)
 The game is a choice-driven, text-based adventure in which players guide a forgotten file through a mysterious digital world. Through narrative passages, interactive decisions, and branching scenarios, players uncover clues about the protagonist's identity and explore themes of digital preservation, memory, and data corruption.
 
 Gameplay revolves around reading the story and selecting responses to the situations the protagonist encounters. Each scenario presents the player with a set of choices, ranging from investigating unfamiliar objects to interacting with mysterious computer systems and deciding how to respond to dangerous situations. The consequences of these decisions are communicated through narrative feedback, allowing the story to react to the player's actions.
