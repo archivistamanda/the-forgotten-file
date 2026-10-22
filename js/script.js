@@ -159,11 +159,18 @@ function initializeMusicToggle() {
 
   updateMusicButton();
 }
+// ==========================================
+// MEMORY SCENARIO DETECTION
+// ==========================================
+function isMemoryScenario(scenarioId) {
+  return scenarioId.startsWith("mem-");
+}
 
 // ==========================================
 // DISPLAY SCENARIO
 // ==========================================
 function showScenario(id) {
+
   const scenario = scenarios.find(item => item.id === id);
 
   if (!scenario) {
@@ -236,6 +243,42 @@ function showScenario(id) {
 
   // Scenario 03: display questions one at a time
   let choicesToDisplay = scenario.choices;
+
+  // ==========================================
+  // SCENARIO 09: SHOW OPPOSITE CHOICE + THIRD CHOICE
+  // ==========================================
+  if (id === "scenario-09") {
+    const scenario6Choice =
+      playerResponses["scenario-06"]?.text?.trim();
+
+    const thirdChoice = scenario.choices[2];
+
+    let oppositeChoiceText = null;
+
+    if (scenario6Choice === "Building") {
+      oppositeChoiceText = "Woods";
+    } else if (scenario6Choice === "Woods") {
+      oppositeChoiceText = "Building";
+    }
+
+    choicesToDisplay = scenario.choices.filter(
+      (choice, index) =>
+        index === 2 ||
+        (
+          oppositeChoiceText !== null &&
+          choice.text.trim() === oppositeChoiceText
+        )
+    );
+
+    console.log(
+      "Scenario 09 selected response:",
+      scenario6Choice
+    );
+    console.log(
+      "Scenario 09 choices displayed:",
+      choicesToDisplay.map(choice => choice.text)
+    );
+  }
 
   if (id === "scenario-03") {
     choicesToDisplay = scenario.choices.slice(
@@ -456,7 +499,17 @@ function showScenario(id) {
         );
       }
 
-      // Show feedback modal
+      // ==========================================
+      // HANDLE MEMORY SCENARIOS WITHOUT A MODAL
+      // ==========================================
+      if (isMemoryScenario(id)) {
+        if (choice.next) {
+          showScenario(choice.next);
+        }
+        return;
+      }
+
+      // Show feedback modal for regular scenarios
       showResultModal(choice, id);
     });
 

@@ -9,12 +9,16 @@ The game is a choice-driven, text-based adventure in which players guide a forgo
 
 Gameplay revolves around reading the story and selecting responses to the situations the protagonist encounters. Each scenario presents the player with a set of choices, ranging from investigating unfamiliar objects to interacting with mysterious computer systems and deciding how to respond to dangerous situations. The consequences of these decisions are communicated through narrative feedback, allowing the story to react to the player's actions.
 
-Player decisions also influence a numerical scoring system. Choices can award or deduct points, rewarding certain actions while penalizing others. Maintaining a sufficient score is essential to achieving the game's completion condition, and poor decisions can lead to a game-over scenario. This system encourages players to consider the potential consequences of their actions as they progress through the story.
-
 In addition to selecting predefined choices, players occasionally interact with the game through text input. For example, they may need to enter a specific response to satisfy a requirement and unlock the next part of the narrative. These interactions add variety to the gameplay and reinforce the protagonist's direct engagement with the digital environment.
 
+## Scoring
+Player decisions also influence a numerical scoring system. Choices can award or deduct points, rewarding certain actions while penalizing others. Maintaining a sufficient score (above 1) is essential to achieving the game's completion condition, and poor decisions can lead to a game-over scenario. This system encourages players to consider the potential consequences of their actions as they progress through the story.
+
+## Memory Profile
+The player’s memory profile will update as they progress through the game and gather information. A notice will appear to let the player know their memory profile was new information. The player may interact with the memory profile at any time by clicking the **Memory Profile** button located at the upper left corner of each scenario.
+
 ## Music
-All music is original and composed by the game creators. 
+Original, short music clips accompany each scenario. The music plays on a loop. To hear the music, the player must click on the Music on button at the beginning of the game. The music can be turned off at any time by clicking the Music off button.
 
 ## Image Credits
 - About: [Tiny LLM Deployment Patterns: Architecture Blueprints from Published Benchmarks](https://josedavidbaena.com/blog/tiny-language-models/tiny-llm-case-studies-production) - Jose David Baena
@@ -25,7 +29,7 @@ All music is original and composed by the game creators.
   - Strange Surroundings
   - A Voice in the Machine
   - The Mirror Within
-- Chapter 2:
+- Chapter 2: The Forest of Forgotten Context
 - Chapter 3: The Path to Eternal Life
 
 ## Creators
