@@ -343,7 +343,7 @@ function showScenario(id) {
           return;
         }
 
-        if (id !== "scenario-03" && answered) {
+        if (id !== "scenario-03" && id !== "scenario-19" && answered) {
           return;
         }
 
@@ -356,23 +356,29 @@ function showScenario(id) {
 
         // Validate answer if acceptedAnswers is configured
         if (Array.isArray(choice.acceptedAnswers)) {
+          const normalizedAnswer = answer.trim().toLowerCase();
+
           const isCorrect = choice.acceptedAnswers.some(
             accepted =>
-              String(accepted).toLowerCase() ===
-              answer.toLowerCase()
+              String(accepted).trim().toLowerCase() === normalizedAnswer
           );
 
           if (!isCorrect) {
             errorMessage.textContent =
-              "That isn't quite right. Try sending a smiley face!";
+              id === "scenario-19"
+                ? "That isn't quite right."
+                : "That isn't quite right. Try sending a smiley face!";
+
             errorMessage.hidden = false;
             input.focus();
             return;
           }
         }
-
-        errorMessage.hidden = true;
-
+        // Disable the submit button after a correct answer
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+        }
         // Remember selected choice
         selectedChoices[id].push(choice.id);
 
@@ -693,8 +699,6 @@ function showResultModal(choice, scenarioId, playerAnswer = null) {
       modalBody.appendChild(p);
     });
   }
-
-
 
   // Show points earned and the running total.
   const points = Number(choice.points) || 0;

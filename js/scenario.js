@@ -47,7 +47,7 @@ const scenarios = [
     story: [
       "Once your eyes adjust to the dim light, you survey your condition. There are some scratches and bruising and your outer layers are torn, but the flashing of the emergency lights making the dull throbbing in the back of your head worse is the most worrisome. The soft humming in the distance isn’t helping either. A fever may set in soon.",
 
-      "As you stand, a rustling sound at your feet makes you jump—is there a bug? Do you: "
+      "As you stand, a rustling sound at your feet makes you jump—is there a bug? Do you:"
     ],
 
     choices: [
@@ -68,7 +68,7 @@ const scenarios = [
         points: 5,
         next: "scenario-02",
         feedback: [
-          "No, it’s just the remains of a notepad that’s in even worse condition than you are, and something bright yellow is caught between the pages.",
+          "A sigh of relief, it’s just the remains of a notepad that’s in even worse condition than you are, and something bright yellow is caught between the pages. The edges of the notepad look like they’ve been nibbled by a mouse.",
 
           "Picking up the notepad, you dust off what’s left of the cover but find no identifying information. Flipping through, you can see some letter-shaped indents but anything that was written has faded with time. You shake your head at the folly of your predecessors: didn’t they know paper and pencil wouldn’t last?",
 
@@ -88,16 +88,16 @@ const scenarios = [
       "You have so many questions, but at last you have a clue! You look around for any other signs and you almost miss it: one of the computers has fallen on its side but a green cursor blinks on its screen. You stare, and it blinks once more, then again. You blink multiple times to make sure you’re not seeing things and when you look again, text has appeared:",
       "------------------------------------------------",
       '"Ask me anything 🙂".',
-      "------------------------------------------------",
-      "You open your mouth, and then close it. Open and close. You had so many questions just a moment ago, but now your memory is blank. Clearing your throat, you manage a weak “Who are you?”"
     ],
     choices: [
       {
         id: "choice-02-01",
-        text: "Who are you?",
+        text: "Stay where you are and ask a question out loud",
         points: 2,
         next: "scenario-03",
         feedback: [
+          "You open your mouth, and then close it. Open and close. You had so many questions just a moment ago, but now your memory is blank. Clearing your throat, you manage a weak “Who are you?”",
+
           "A soft echo whispers your question back at you followed by silence. You cringe, okay, what did you really expect?",
         ]
       },
@@ -136,6 +136,12 @@ const scenarios = [
           "(1) the file extension for the plain text file format",
           "(2) the initials of researcher Taylor X. Tang",
           "(3) the abbreviated language and slang developed in the late 1990s and early 2000s for mobile text messaging due to difficult key entry, character limits, and pay-per-character charges",
+          "------------------------------------------------",
+          "You laugh briefly at the trivia, but return quickly to the second entry: Perhaps Taylor is the name of your creator.",
+
+          "The cursor blinks for your attention and new letters appear:",
+          "------------------------------------------------",
+          '“What else would you like to know?"'
         ]
       },
       {
@@ -145,6 +151,8 @@ const scenarios = [
         next: "scenario-03",
         feedback: [
           "You press enter and characters slowly march across the screen:",
+          "------------------------------------------------",
+
           "(1) nine tenths represented as a fraction",
           "(2) a score of nine out of 10",
           "(3) the date September 10, following the US date format",
@@ -165,10 +173,12 @@ const scenarios = [
         next: "scenario-03",
         feedback: [
           "A thrill runs through you as an answer appears:",
-          "'As of: 20021013",
-          "Name: observations_20021009",
-          "By: TX Tang'",
+          "------------------------------------------------",
 
+          "As of: 20021013",
+          "Name: observations_20021009",
+          "By: TX Tang",
+          "------------------------------------------------",
           "You have a name! “09/10” must refer to October 9 since there is no thirteenth month for 20021013 to refer to. It seems highly likely that TX Tang and TXT are one and the same too. “By” means they must be your creator.",
           "------------------------------------------------",
           "The cursor moves to a new line:",
@@ -183,11 +193,13 @@ const scenarios = [
         next: "scenario-03",
         feedback: [
           "A list unfurls on screen:",
-          "'Identity marker: [insert checksum value]",
+          "------------------------------------------------",
+
+          "Identity marker: 522164c274d28b1e443e56821b1da13515d24d1525d8e75ebae5d357d2f84aec",
           "Extension: XLS",
           "Data type: tabular",
           "Layers: multiple",
-          "Contents: ÐÏà¡±á>þÿ5þÿÿÿþÿÿÿ4'",
+          "Contents: ÐÏà¡±á>þÿ5þÿÿÿþÿÿÿ4",
           "------------------------------------------------",
           "You’re not quite sure what everything means, but it all looks important and you pat yourself on the back for asking such an excellent question.",
 
@@ -291,13 +303,13 @@ const scenarios = [
     story: [
       "You feel wind on your face. You look around, and strangely, you seem to be at the edge of a forest. As you take stock of your surroundings, you hear a voice coming from the edge of the woods,",
       "------------------------------------------------",
-      "Confused, you step closer and ask,",
+      '"Welcome, to the Forest of Forgotten Context, stranger. I see you too have begun your journey to eternal life". ',
       "------------------------------------------------",
-      '"Who are you and what do you mean “my journey to eternal life?”"',
+      'Confused, you step closer and ask, "Who are you and what do you mean “my journey to eternal life?"',
       "------------------------------------------------",
-      'The voice from the edge of the woods chuckles. "I see many a file format pass through here in your same shoes. Let me guess, you&#39,ve just awoken and have only just begun to understand who you are?",',
+      'The voice from the edge of the woods chuckles. "I see many a file format pass through here in your same shoes. Let me guess, you have just awoken and have only just begun to understand who you are?",',
       "------------------------------------------------",
-      "You nod in affirmation. HA! I knew it, well, you should know, stranger, that this land is vast and dangerous, but it also holds many wonders. One of which is the Castle of Preservation, to which files of all kinds travel to seek eternal life. The Castle lies to the north of here, but beware, if you seek eternal life you require much more knowledge of yourself then I suspect you already have. Gather as much as you can if you plan to travel to the Castle. Eternal life is a tempting promise, but it is by no means guaranteed...",
+      'You nod in affirmation. "HA! I knew it, well, you should know, stranger, that this land is vast and dangerous, but it also holds many wonders. One of which is the Castle of Preservation, to which files of all kinds travel to seek eternal life. The Castle lies to the north of here, but beware, if you seek eternal life you require much more knowledge of yourself then I suspect you already have. Gather as much as you can if you plan to travel to the Castle. Eternal life is a tempting promise, but it is by no means guaranteed..."',
       "------------------------------------------------",
       "With a rustle, whatever was speaking to you from the tree-line recedes into the dark underbrush, leaving you with more questions than answers. As you puzzle over the words of the voice in the woods you look around.There’s a building nearby and a path into the woods. Do you head into the woods or to the building?",
     ],
@@ -318,7 +330,7 @@ const scenarios = [
         points: 3,
         next: "scenario-08",
         feedback: [
-          "You start moving towards the woods."
+          "You wander along the path, arriving at a small building with a research lab."
         ]
       },
     ]
@@ -329,7 +341,7 @@ const scenarios = [
     chapter: "Chapter II: The Forest of Forgotten Context",
     title: "The Library of Missing Memories",
     story: [
-      "A helpful librarian walks up to you and offers to assist you. You have so many questions. The interactions with the computer and the stranger in the woods are stillis still swirling in your brain. “How can I help?” asks the Librarian. What do you ask about?"
+      "As you enter the library, a helpful librarian walks up to you and offers to assist you. You have so many questions. The interactions with the computer and the stranger in the woods are stillis still swirling in your brain. “How can I help?” asks the Librarian. What do you ask about?"
     ],
     background: "assets/images/scenario-07.png",
     choices: [
@@ -349,6 +361,15 @@ const scenarios = [
         next: "scenario-09",
         feedback: [
           "The librarian tells you you’ve reached Evergreen University Science Lab and Library. The path in the woods goes to several different lab observation stations"
+        ]
+      },
+      {
+        id: "choice-07-03",
+        text: "What is the castle of preservation?",
+        points: 3,
+        next: "scenario-07",
+        feedback: [
+          "The Castle of Preservation is a mysterious place rumored to hold the power to grant files eternal life. It is said that upon entry, files are tasked with various trials to determine whether they are truly worthy to be preserved forever. "
         ]
       },
     ]
@@ -444,7 +465,16 @@ const scenarios = [
         points: 3,
         next: "scenario-09",
         feedback: [
-          "You wander along the path, arriving at a small building. You enter and see a computer and filing cabinet alongside sampling equipment and cameras."
+          "The librarian tells you you’ve reached Evergreen University Science Lab and Library. The path in the woods goes to several different lab observation stations."
+        ]
+      },
+      {
+        id: "choice-10-03",
+        text: "What is the castle of preservation?",
+        points: 3,
+        next: "scenario-11",
+        feedback: [
+          "The Castle of Preservation is a mysterious place rumored to hold the power to grant files eternal life. It is said that upon entry, files are tasked with various trials to determine whether they are truly worthy to be preserved forever. "
         ]
       },
     ]
@@ -604,9 +634,9 @@ const scenarios = [
         id: "choice-15-01",
         text: "Allow the preservationist to perform the procedure",
         points: 5,
-        next: "",
+        next: "scenario-17",
         feedback: [
-          "The preservationist walks you to a curtain in the back of the workshop. When they draw the curtain back, you see a pair of glass chambers connected by various tubes. The preservationist explains that you are a proprietary format, which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
+          "The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of  your format signature,  that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
           "The preservationist continues, “This transcoding procedure is called “Normalization”, and is an essential part of my craft. I want to give you the best chance you have at achieving eternal life. Like I said, it shouldn’t hurt too much.” The preservationist opens the door to one of the chambers and you walk inside.",
 
@@ -621,18 +651,18 @@ const scenarios = [
       },
       {
         id: "choice-15-02",
-        text:"Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
+        text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
         points: 0,
-        next:"scenario-lose",
-        feedback:[
+        next: "scenario-lose",
+        feedback: [
           "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!"
         ]
       },
       {
         id: "choice-15-03",
-        text:"Ask why they want to perform the procedure",
+        text: "Ask why they want to perform the procedure",
         points: 3,
-        next:"",
+        next: "scenario-16",
         feedback: ["The preservationist explains that you are a proprietary format, which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.”"]
       },
 
@@ -641,19 +671,19 @@ const scenarios = [
   {
     id: "scenario-16",
     chapter: "Chapter III: Path to Eternal Life",
-    story: 
-    [
-      "The preservationist asks, “With the extra information you now have, how would you like to proceed?"
-    ],
+    story:
+      [
+        "The preservationist asks, “With the extra information you now have, how would you like to proceed?"
+      ],
     background: "",
     choices: [
       {
         id: "choice-16-01",
         text: "Allow the preservationist to perform the procedure",
         points: 5,
-        next: "",
+        next: "scenario-17",
         feedback: [
-          "The preservationist walks you to a curtain in the back of the workshop. When they draw the curtain back, you see a pair of glass chambers connected by various tubes. The preservationist explains that you are a proprietary format, which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
+          "The preservationist walks you to a curtain in the back of the workshop. When they draw the curtain back, you see a pair of glass chambers connected by various tubes. The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of  your format signature,  that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary nature may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
           "The preservationist continues, “This transcoding procedure is called “Normalization”, and is an essential part of my craft. I want to give you the best chance you have at achieving eternal life. Like I said, it shouldn’t hurt too much.” The preservationist opens the door to one of the chambers and you walk inside.",
 
@@ -668,37 +698,165 @@ const scenarios = [
       },
       {
         id: "choice-16-02",
-        text:"Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
+        text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
         points: 0,
-        next:"scenario-lose",
-        feedback:[
+        next: "scenario-lose",
+        feedback: [
           "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!"
         ]
       },
     ]
   },
-
   {
-    id: "",
-    chapter: "",
-    story: [""],
+    id: "scenario-17",
+    chapter: "Chapter IV: The Trials of Eternal Life",
+    titel: "The Castle of Preservation",
+    story: [
+      "You continue to walk for many days through rough woodland, until you finally glimpse a looming castle through the trees. Elated, you hurry along until you finally arrive at the castle’s front doors. The gnarled, wooden doors stand tall in front of you, you reach out and knock. In response, the doors slowly swing open, revealing a long, dark chamber, whose only light is a beam illuminating a lone pedestal in the centre of the room. You enter the room and approach the pedestal. A disembodied voice rings out across the empty hall,",
+      "------------------------------------------------",
+      "Welcome to the Castle of Preservation. Have you come in search of eternal life?"
+    ],
     background: "",
     choices: [
       {
-        id: "",
-        text: "",
+        id: "choice-17-01",
+        text: "Yes, I have",
         points: 0,
-        next: "",
-        feedback: ""
+        next: "scenario-18",
+        feedback: "Very well. In order to be granted eternal life, you must present the fruits of your quest. Place your associated documentation on the altar."
       },
       {
+        id: "choice-17-02",
+        text: "No, this was a mistake",
+        points: -50,
+        next: "scenario-lose",
+        feedback: "Overcome with doubt, you leave the Castle and decide to take your chances living your natural lifespan. Over the years you lose track of the items you gained on your quest. Your technical metadata gets misplaced, your normalized version decides to leave and start their own life, and you slowly forget your identity. Eventually you end up where you began, confused and degrading, and without the mechanisms to protect your identity and integrity in place, you slowly lose your ability to be understood, and so slip away into darkness"
+      },
+    ]
+  },
+  {
+    id: "scenario-18",
+    chapter:"Chapter IV: The Trials of Eternal Life",
+    title: "The Preservation Test",
+    story: [
+      "You search your memory profile for the information the Preservationist is asking you for.",
+    ],
+    background: "",
+    choices: [
+      {
+        id: "choice-18-01",
+        text: "Place the procedures manual that you took from the lab observation station on the altar.",
+        points: 5,
+        next: "scenario-19",
+        feedback: "Excellent. Everything looks in order."
+      },
+      {
+        id: "choice-18-02",
+        text: "I do not have any associated documentation",
+        points: -5,
+        next: "scenario-19",
+        feedback: "Very well, we will continue with the next steps."
+      },
+    ]
+  },
+  {
+    id: "scenario-19",
+    chapter: "Chapter IV: The Trials of Eternal Life",
+    title: "The Identity Challenge",
+    story: [
+      "Speak your file format and date of creation to the empty room.",
+    ],
+    background: "",
+    choices: [
+      {
+        id: "choice-19-01",
+        text: "Speak your format",
+        type: "text",
+        placeholder: "Enter your file format.",
+        acceptedAnswers: [
+          "XLS",
+          "fmt/61",
+          "Microsoft Excel 97-2003 Workbook"
+        ],
+        points: 10,
+        next: "scenario-21",
+        feedback: "The walls come alive with the runic characters you saw before during the transcoding procedure.",
+      },
+      {
+        id: "choice-19-02",
+        text: "I do not know my file extension and creation date",
+        points: -5,
+        next: "scenario-22",
+        feedback: "The runics on the walls are getting dimmer. You start to worry that something might be wrong, but you push your worries aside and continue."
+      },
+    ]
+  },
+  {
+    id: "scenario-20",
+    chapter: "The Normalized Self",
+    story: [
+      "Very well. then bring forth your normalized version. Have them step into the light",
+    ],
+    background: "",
+    choices: [
+      {
+        id: "choice-20-01",
+        text: "You nudge the normalized version of yourself forward into  the light",
+        points: 10,
+        next: "scenario-21",
+        feedback: "Excellent. Proceed through the door for your final assessment",
+      },
+      {
+        id: "choice-20-02",
+        text: "I do not have a normalized version of myself",
+        points: -5,
+        next: "scenario-22",
+        feedback: "“Very well. Proceed through the door for your final assessment.”"
+      },
+    ]
+  },
+
+  {
+    id: "scenario-21",
+    chapter: "Eternal Life",
+    title: "",
+    story: [
+      "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s. The same disembodied voice resonates in your head,",
+      "------------------------------------------------",
+      "“You have succeeded in providing the metadata and documentation required to access and understand you in the future. You have fulfilled the terms required for being granted eternal life. You will now be packed alongside all of the fruits of your quest, replicated, and maintained for the eternity to come. Welcome to the AIP store.”",
+    ],
+    choices: [
+      {
+        id: "choice-21-01",
+        text: "Continue",
+        next: "scenario-win",
 
       }
     ]
   },
 
+  {
+    id: "scenario-21",
+    chapter: "Epilogue: The Limits of Preservation",
+    title: "Minimum Retention",
+    story: [
+      "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s.",
 
+      "The same disembodied voice booms in your head:",
+      "------------------------------------------------",
 
+      "You have failed to provide the metadata and documentation that would be necessary for accessing and understanding you in the future. I am sorry, but you will not receive eternal life. You will be packaged but will only be stored for the castle’s(?) minimum retention period, after which you will be deaccessioned and permanently deleted.”"
+
+    ],
+    choices: [
+      {
+        id: "choice-22-01",
+        text: "Continue",
+        next: "scenario-lose",
+
+      }
+    ]
+  },
   // End Scenarios
   {
     id: "scenario-win",
@@ -707,7 +865,9 @@ const scenarios = [
     story: [
       "Congratulations!",
 
-      "You successfully completed the game and maintained a score of at least 1."
+      "You gathered enough information to understand youself and have successfully completed the game.",
+
+      "Enjoy your time in eternal life...."
     ],
     choices: []
   },
@@ -716,8 +876,8 @@ const scenarios = [
     chapter: "Game Over",
     title: "Mission Failed",
     story: [
-      "Your score dropped below 1.",
-      "Unfortunately, you were unable to complete your mission."
+      "Unfortunately, you did not gather enough context about yourself.",
+      "You waste away over time and become obsolete as technology advances and the world changes.",
     ],
     choices: []
   }
