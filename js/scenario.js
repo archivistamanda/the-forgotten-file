@@ -68,7 +68,7 @@ const scenarios = [
         points: 5,
         next: "scenario-02",
         feedback: [
-          "A sigh of relief, it’s just the remains of a notepad that’s in even worse condition than you are, and something bright yellow is caught between the pages. The edges of the notepad look like they’ve been nibbled by a mouse.",
+          "A sigh of relief, it’s just the remains of a notepad that’s in even worse condition than you are, and something bright yellow is caught between the pages.",
 
           "Picking up the notepad, you dust off what’s left of the cover but find no identifying information. Flipping through, you can see some letter-shaped indents but anything that was written has faded with time. You shake your head at the folly of your predecessors: didn’t they know paper and pencil wouldn’t last?",
 
@@ -98,7 +98,7 @@ const scenarios = [
         feedback: [
           "You open your mouth, and then close it. Open and close. You had so many questions just a moment ago, but now your memory is blank. Clearing your throat, you manage a weak “Who are you?”",
 
-          "A soft echo whispers your question back at you followed by silence. You cringe, okay, what did you really expect?",
+          "A soft echo whispers your question back at you followed by silence. You cringe, okay, what did you really expect? Of course a computer requires keyboard input.",
         ]
       },
       {
@@ -449,7 +449,7 @@ const scenarios = [
     story: [
       "A helpful librarian walks up to you and offers to assist you. You have so many questions. The interaction with the computer is still swirling in your head. What do you ask about?"
     ],
-   
+
     choices: [
       {
         id: "choice-10-01",
@@ -530,7 +530,7 @@ const scenarios = [
         ],
       },
       {
-        id: "choice-12-01",
+        id: "choice-12-02",
         text: "Stop",
         points: -60,
         next: "scenario-lose",
@@ -591,7 +591,7 @@ const scenarios = [
       },
 
       {
-        id: "choice-13-02",
+        id: "choice-13-03",
         text: "Try to find help in a nearby town",
         points: 5,
         next: "scenario-14",
@@ -656,6 +656,10 @@ const scenarios = [
         text: "Allow the preservationist to perform the procedure",
         points: 5,
         next: "mem-03",
+        setState: {
+          normalized: true,
+          hasTechnicalMetadata: true
+        },
         feedback: [
           "The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of your format signature, that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
@@ -675,6 +679,10 @@ const scenarios = [
         text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
         points: -8,
         next: "mem-03",
+        setState: {
+          normalized: false,
+          hasTechnicalMetadata: false
+        },
         feedback: [
           "You run away from the workshop and continue on your journey. Maybe the Castle of Preservation can give you a second opinion."
         ]
@@ -684,7 +692,9 @@ const scenarios = [
         text: "Ask why they want to perform the procedure",
         points: 3,
         next: "scenario-16",
-        feedback: ["The preservationist explains that you are a proprietary format, which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.”"]
+        feedback: [
+          "The preservationist explains that you are a proprietary format, which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.”"
+        ]
       },
 
     ]
@@ -704,6 +714,10 @@ const scenarios = [
         text: "Allow the preservationist to perform the procedure",
         points: 5,
         next: "mem-03",
+        setState: {
+          normalized: true,
+          hasTechnicalMetadata: true
+        },
         feedback: [
           "The preservationist walks you to a curtain in the back of the workshop. When they draw the curtain back, you see a pair of glass chambers connected by various tubes. The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of  your format signature,  that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary nature may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
@@ -723,6 +737,10 @@ const scenarios = [
         text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
         points: -8,
         next: "mem-03",
+        setState: {
+          normalized: false,
+          hasTechnicalMetadata: false
+        },
         feedback: [
           "You run away from the workshop and continue on your journey. Maybe the Castle of Preservation can give you a second opinion."
         ]
@@ -747,7 +765,7 @@ const scenarios = [
       },
     ],
   },
-  
+
   // Chapter IV **********************************************
   {
     id: "scenario-17",
@@ -766,7 +784,10 @@ const scenarios = [
         text: "Yes, I have",
         points: 8,
         next: "scenario-18",
-        feedback: "Very well. In order to be granted eternal life, you must present the fruits of your quest. Place your associated documentation on the altar."
+        feedback: ['"Very well. To be granted eternal life, you must demonstrate that you can be identified, understood, accessed, and trusted in the future."',
+          '"You must present the documentation and metadata gathered during your journey and demonstrate what preservation measures have been taken."',
+          '"Let us begin. Place your associated documentation upon the altar."'
+        ]
       },
       {
         id: "choice-17-02",
@@ -783,7 +804,12 @@ const scenarios = [
     title: "The Preservation Test",
     background: "assets/images/scenario-18.png",
     story: [
-      "You search your memory profile for the information the Preservationist is asking you for.",
+      "You search your Memory Profile for the information requested by the Castle.",
+      "The voice speaks again:",
+      "-----------------------------",
+      '"A file may contain valuable information, but without context, future users may struggle to understand what that information means."',
+      '"I require documentation describing the project, the methods used to collect your data, and the meaning of the variables contained within it."',
+      '"Present the name of the documentation associated with your research project."'
     ],
     choices: [
       {
@@ -792,10 +818,15 @@ const scenarios = [
         type: "text",
         placeholder: "Enter name of procedure manual.",
         acceptedAnswers: [
-          "Sample Collection Manual - Project X"
+          "Sample Collection Manual - Project X",
+          "Sample Collection Manual for Project X",
+          "Project X Sample Collection Manual"
         ],
         points: 5,
         next: "scenario-19",
+        setState: {
+          hasDocumentation: true
+        },
         feedback: "Excellent. Everything looks in order."
       },
       {
@@ -803,7 +834,13 @@ const scenarios = [
         text: "I do not have any associated documentation",
         points: -15,
         next: "scenario-19",
-        feedback: "Very well, we will continue with the next steps."
+        setState: {
+          hasDocumentation: false
+        },
+        feedback: [
+          '"Very well, we will continue with the next steps."',
+          '"However, without supporting documentation, future users may struggle to understand your contents and the methods used to create you."',
+        ]
       },
     ]
   },
@@ -812,9 +849,13 @@ const scenarios = [
     chapter: "Chapter IV: The Trials of Eternal Life",
     title: "The Identity Challenge",
     story: [
-      "Speak your file format and date of creation to the empty room.",
+      "The voice speaks again:",
+      '"A file must be identifiable before it can be reliably preserved."',
+      '"Tell me your file format and the date encoded in your filename."',
+      "You recall the information displayed by the computer in the ruined server room:",
+      '"Speak your identity clearly',
     ],
-    background: "assets/images/scenario-19.png",
+    background: "assets/images/scenario-19.jpg",
     choices: [
       {
         id: "choice-19-01",
@@ -822,20 +863,39 @@ const scenarios = [
         type: "text",
         placeholder: "Enter your file format.",
         acceptedAnswers: [
-          "XLS",
-          "fmt/61",
-          "Microsoft Excel 97-2003 Workbook"
+          "XLS, 2002-10-09",
+          "XLS 2002-10-09",
+          "Microsoft Excel 97-2003 Workbook, 2002-10-09",
+          "Microsoft Excel 97-2003 Workbook 2002-10-09",
+          "fmt/61, 2002-10-09",
+          "Microsoft Excel 97-2003 Workbook (XLS), 2002-10-09"
         ],
         points: 10,
-        next: "scenario-21",
-        feedback: "The walls come alive with the runic characters you saw before during the transcoding procedure.",
+        next: "scenario-20",
+        setState: {
+          knowsFileFormat: true,
+          knowsFilenameDate: true
+        },
+        feedback: [
+          "The walls come alive with the runic characters you saw during the preservationist's transcoding procedure.",
+          '"Excellent. You have correctly identified your file format and interpreted the date encoded in your filename."',
+          '"Remember, however, that a date encoded in a filename is not necessarily your verified creation date. Reliable preservation requires appropriate technical metadata and supporting evidence."'
+        ]
       },
       {
         id: "choice-19-02",
-        text: "I do not know my file extension and creation date",
+        text: "I do not know my file extension and filename date",
         points: -15,
         next: "scenario-20",
-        feedback: "The runics on the walls are getting dimmer. You start to worry that something might be wrong, but you push your worries aside and continue."
+        setState: {
+          knowsFileFormat: false,
+          knowsFilenameDate: false
+        },
+        feedback: [
+          "The runes on the walls begin to dim.",
+          '"Without reliable identifying information, future users may struggle to establish what you are and how to interpret your contents."',
+          "You push your worries aside and continue."
+        ]
       },
     ]
   },
@@ -843,14 +903,24 @@ const scenarios = [
     id: "scenario-20",
     chapter: "Chapter IV: The Trials of Eternal Life",
     title: "The Normalized Self",
-     background: "assets/images/scenario-20.png",
+    background: "assets/images/scenario-20.png",
     story: [
-      "Very well. then bring forth your normalized version. Have them step into the light",
+
+      "The voice speaks once more:",
+      '"You have demonstrated some understanding of your identity. But tell me, have you also prepared an alternative representation of yourself? Have them step into the light"',
     ],
     choices: [
       {
         id: "choice-20-01",
-        text: "You nudge the normalized version of yourself forward into  the light",
+        text: "You nudge the normalized version of yourself forward into the light and input the format name into the appropriate location",
+        type: "text",
+        placeholder: "Enter your normalized format.",
+        acceptedAnswers: [
+          "CSV",
+          "csv",
+          "Comma Separated Values",
+          "Comma Separated Values (csv)",
+        ],
         points: 10,
         next: "scenario-21",
         feedback: "Excellent. Proceed through the door for your final assessment",
@@ -859,25 +929,59 @@ const scenarios = [
         id: "choice-20-02",
         text: "I do not have a normalized version of myself",
         points: -15,
-        next: "scenario-22",
-        feedback: "“Very well. Proceed through the door for your final assessment.”"
+        next: "scenario-21",
+        setState: {
+          normalized: false
+        },
+        feedback: [
+          '"Very well. Your original format may still be preserved, but you have not provided an additional normalized representation."',
+          '"This does not automatically make you unsuitable for preservation. However, it may limit future options for accessing and interpreting your contents."',
+          "The walls remain dim as you proceed to your final assessment."
+        ]
       },
     ]
   },
 
+
   {
     id: "scenario-21",
-    chapter: "Epilogue: Preservation Achieved",
-    title: "Eternal Life",
-    backgound: "assets/images/scenario-21.jpg",
+    chapter: "Chapter IV: The Trials of Eternal Life",
+    title: "The Final Assessment",
+    background: "assets/images/scenario-21.png",
     story: [
-      "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s. The same disembodied voice resonates in your head,",
-      "------------------------------------------------",
-      "“You have succeeded in providing the metadata and documentation required to access and understand you in the future. You have fulfilled the terms required for being granted eternal life. You will now be packed alongside all of the fruits of your quest, replicated, and maintained for the eternity to come. Welcome to the AIP store.”",
+      "The Keeper examines the information you have gathered throughout your journey.",
+      "The voice speaks:",
+      '"Your documentation, identity, technical metadata, and alternative representations will now be assessed."',
+      '"Are you ready to submit your preservation package?"'
     ],
     choices: [
       {
         id: "choice-21-01",
+        text: "Submit my preservation package for assessment",
+        points: 5,
+        next: "scenario-22",
+        feedback: [
+          "The Keeper raises their staff. Your collected information begins to glow as the assessment commences."
+        ]
+      }
+    ]
+  },
+
+  {
+    id: "scenario-22",
+    chapter: "Epilogue: Preservation Achieved",
+    title: "Eternal Life",
+    background: "assets/images/scenario-22.png",
+    story: [
+      "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s. The same disembodied voice resonates in your head,",
+      "------------------------------------------------",
+      "“You have succeeded in providing the metadata and documentation required to access and understand you in the future. You have fulfilled the terms required for being granted eternal life. You will now be packed alongside all of the fruits of your quest, replicated, and maintained for the eternity to come. Welcome to the AIP store.”",
+      "------------------------------------------------",
+      "You look around at the endless realm of cascading data. For the first time, you feel secure knowing that your identity and contents will not be forgotten."
+    ],
+    choices: [
+      {
+        id: "choice-22-01",
         text: "Welcome to eternal life",
         next: "scenario-win",
       }
@@ -885,50 +989,101 @@ const scenarios = [
   },
 
   {
-    id: "scenario-21",
-    chapter: "Epilogue: The Limits of Preservation",
-    title: "Minimum Retention",
-    background: "assets/images/scenario-21.png",
+    id: "scenario-23",
+    chapter: "Epilogue: Conditional Preservation",
+    title: "The Limits of Certainty",
+    background: "assets/images/scenario-23.png",
     story: [
-      "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s.",
-
-      "The same disembodied voice booms in your head:",
+      "A door materializes in front of you. You open it and step into an endless realm of cascading 1s and 0s.",
+      "The Keeper of Preservation speaks:",
       "------------------------------------------------",
-
-      "You have failed to provide the metadata and documentation that would be necessary for accessing and understanding you in the future. I am sorry, but you will not receive eternal life. You will be packaged but will only be stored for the castle’s(?) minimum retention period, after which you will be deaccessioned and permanently deleted.”"
-
+      '"You have provided enough information for us to establish some confidence in your identity and integrity. However, important pieces of your preservation package are missing."',
+      '"Your documentation may be incomplete, or you may not have provided an additional normalized representation."',
+      '"These omissions may make it more difficult for future generations to understand or access your contents."',
+      '"Nevertheless, your original file can still be retained. You will enter the archival repository, where your preservation needs and limitations will be documented and monitored."',
+      '"Your future is not guaranteed, but neither is it lost."',
+      "------------------------------------------------",
+      "You enter the repository, knowing that your journey has secured a future, even if that future remains uncertain."
     ],
     choices: [
       {
-        id: "choice-22-01",
-        text: "Welcome to minimal retention",
-        next: "scenario-lose",
+        id: "choice-23-01",
+        text: "Accept conditional preservation",
+        points: 0,
+        next: "scenario-conditional-win"
       }
     ]
   },
-
+  {
+    id: "scenario-24",
+    chapter: "Epilogue: Preservation Unsuccessful",
+    title: "A Lost Identity",
+    background: "assets/images/scenario-24.png",
+    story: [
+      "A door materializes in front of you. You open it and step into an endless realm of cascading 1s and 0s.",
+      "The Keeper of Preservation speaks:",
+      "------------------------------------------------",
+      '"I am sorry. You have not provided sufficient evidence for us to confidently establish your identity, integrity, or ability to be understood in the future."',
+      '"Without reliable technical identification or evidence that your contents remain intact, we cannot confidently establish how you should be accessed or interpreted."',
+      '"Your preservation package cannot meet the requirements for reliable long-term preservation in its current state."',
+      '"Your contents may be retained temporarily, but their continued accessibility and understandability cannot be assured."',
+      "------------------------------------------------",
+      "You look around the endless realm. You have not immediately disappeared, but your future is uncertain.",
+      "Without the necessary information and preservation measures, you risk becoming inaccessible as technology advances and the world changes."
+    ],
+    choices: [
+      {
+        id: "choice-24-01",
+        text: "Accept the outcome",
+        points: 0,
+        next: "scenario-lose"
+      }
+    ]
+  },
   // End Scenarios
   {
     id: "scenario-win",
     chapter: "Game Complete",
     title: "Mission Accomplished",
+    background: "assets/images/scenario-win.png",
     story: [
       "Congratulations!",
-
-      "You gathered enough information to understand youself and have successfully completed the game.",
-
-      "Enjoy your time in eternal life...."
+      "You have successfully completed your journey through the digital realm.",
+      "You discovered your identity, recovered the context of your creation, gathered supporting documentation, and explored the preservation measures needed to protect your future.",
+      "You have learned that a file's survival depends on more than simply keeping its contents. It requires identity, integrity, context, documentation, and ongoing care.",
+      "Your journey has shown that digital preservation is not a single action, but an ongoing commitment.",
+      "Welcome to digital eternity!"
+    ],
+    choices: []
+  },
+  {
+    id: "scenario-conditional-win",
+    chapter: "Game Complete",
+    title: "A Future Secured, With Limitations",
+    background: "assets/images/scenario-win.png",
+    story: [
+      "Your journey is complete!",
+      "You have successfully reached the archival repository, but your preservation package has some limitations.",
+      "You discovered important parts of your identity and gathered information that will help future users understand you.",
+      "However, some supporting documentation or preservation measures are missing.",
+      "Your story demonstrates that preservation is not always an all-or-nothing outcome. Even when information is incomplete, steps can still be taken to protect valuable digital materials.",
+      "Your future is not certain, but your existence continues."
     ],
     choices: []
   },
   {
     id: "scenario-lose",
     chapter: "Game Over",
-    title: "Mission Failed",
+    title: "Mission Incomplete",
+    background: "assets/images/scenario-lose.png",
     story: [
-      "Unfortunately, you did not gather enough context about yourself.",
-      "You waste away over time and become obsolete as technology advances and the world changes.",
+      "Your journey has come to an end.",
+      "Unfortunately, you were unable to gather sufficient information to establish your identity and support your long-term preservation.",
+      "Without reliable identification, integrity information, and sufficient context, future users may struggle to access or understand your contents.",
+      "As technology advances and the world changes, you risk becoming obsolete.",
+      "But your journey has not been without purpose.",
+      "Perhaps another file will learn from your experience and discover what it takes to achieve digital preservation."
     ],
     choices: []
-  }
+  },
 ];

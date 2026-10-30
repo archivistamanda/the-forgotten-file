@@ -18,6 +18,35 @@ let descriptiveMemoryLocked = false;
 let currentStoryPage = 0;
 
 // ==========================================
+// GAME PRESERVATION STATE
+// ==========================================
+
+const gameState = {
+  hasDocumentation: false,
+  knowsFileFormat: false,
+  knowsFilenameDate: false,
+  hasTechnicalMetadata: false,
+  normalized: false
+};
+
+function resetGameState() {
+  gameState.hasDocumentation = false;
+  gameState.knowsFileFormat = false;
+  gameState.knowsFilenameDate = false;
+  gameState.hasTechnicalMetadata = false;
+  gameState.normalized = false;
+}
+
+
+function applyChoiceState(choice) {
+  if (!choice.setState) return;
+
+  Object.assign(gameState, choice.setState);
+
+  console.log("Updated preservation state:", gameState);
+}
+
+// ==========================================
 // DOM Elements
 // ==========================================
 const chapterEl = document.getElementById("chapter");
@@ -38,11 +67,11 @@ const homeMusic = "assets/audio/home.mp3";
 
 const scenarioMusic = {
   "scenario-00": "assets/audio/scenario-00.mp3",
-  "scenario-01": "../assets/audio/scenario-01.mp3",
-  "scenario-02": "../assets/audio/scenario-02.mp3",
-  "scenario-03": "../assets/audio/scenario-03.mp3",
-  "scenario-04": "../assets/audio/scenario-04.mp3",
-  "scenario-05": "../assets/audio/scenario-05.mp3"
+  // "scenario-01": "../assets/audio/scenario-01.mp3",
+  // "scenario-02": "../assets/audio/scenario-02.mp3",
+  // "scenario-03": "../assets/audio/scenario-03.mp3",
+  // "scenario-04": "../assets/audio/scenario-04.mp3",
+  // "scenario-05": "../assets/audio/scenario-05.mp3"
 };
 
 const backgroundMusic = new Audio();
@@ -388,6 +417,8 @@ function showScenario(id) {
         }
         // Remember selected choice
         selectedChoices[id].push(choice.id);
+        // Apply preservation state changes
+applyChoiceState(choice);
 
         // ==========================================
         // TRACK BUILDING AND WOODS VISITS
@@ -488,6 +519,9 @@ function showScenario(id) {
       // Remember selected choice
       selectedChoices[id].push(choice.id);
 
+      // Apply preservation state changes
+applyChoiceState(choice);
+
       // Disable the buttons for this question/scenario
       if (isScenario03) {
         choicesEl.querySelectorAll("button").forEach(btn => {
@@ -516,10 +550,10 @@ function showScenario(id) {
       };
 
       // ==========================================
-      // SCENARIO 15: PRESERVATIONIST DECISION
+      // SCENARIO 16: PRESERVATIONIST DECISION
       // ==========================================
 
-      if (id === "scenario-15") {
+      if (id === "scenario-16") {
 
         const selectedAnswer = choice.text
           .trim()
@@ -621,8 +655,12 @@ async function loadModals() {
 // ==========================================
 // ADVANCE TO THE NEXT SCENARIO
 // ==========================================
+
 function advanceScenario(choice, scenarioId) {
+
+  // Scenario 03: handle questions one at a time.
   if (scenarioId === "scenario-03") {
+
     const scenario03 = scenarios.find(
       item => item.id === "scenario-03"
     );
@@ -641,7 +679,14 @@ function advanceScenario(choice, scenarioId) {
     return;
   }
 
-  // Follow the existing game progression rules.
+  // Scenario 21: assess the preservation package.
+  if (scenarioId === "scenario-21") {
+    const ending = determineEnding(gameState);
+    showScenario(ending);
+    return;
+  }
+
+  // Existing game progression rules.
   if (score < 1) {
     showScenario("scenario-lose");
   } else if (choice.next) {
@@ -649,6 +694,28 @@ function advanceScenario(choice, scenarioId) {
   } else {
     showScenario("scenario-win");
   }
+}
+
+
+
+
+function determineEnding(state) {
+
+  const essentialComplete =
+    state.knowsFileFormat &&
+    state.knowsFilenameDate &&
+    state.hasTechnicalMetadata &&
+    state.normalized;
+
+  if (!essentialComplete) {
+    return "scenario-24";
+  }
+
+  if (state.hasDocumentation) {
+    return "scenario-22";
+  }
+
+  return "scenario-23";
 }
 
 // ==========================================
@@ -1187,6 +1254,7 @@ function restartGame() {
   localStorage.setItem("scenarioId", "scenario-00");
 
   updateScoreDisplay();
+  resetGameState();
 
   document.getElementById("home").remove();
   document.getElementById("scenario")
@@ -1219,6 +1287,7 @@ function initializeGame() {
       scenarioPage?.classList.remove("d-none");
 
       updateScoreDisplay();
+      resetGameState();
 
       // Switch from landing music to scenario-00 music.
       showScenario("scenario-00");
