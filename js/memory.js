@@ -37,9 +37,11 @@ window.memories = [
     formatRegistry: "PRONOM",
     puid: "fmt/61",
 
+    dataType: "tabular",
+    extensionType: "xls",
+
     // Preservation event information
-    dateType: "normalization",
-    dateModified: "2002-10-15",
+    dateModified: "2026-11-05",
     transcode: "normalization",
     eventDetail: "Preservationist normalized the Microsoft Excel 97-2003 Workbook to Comma Separated Value (csv)",
     eventOutcome: "success",
@@ -66,6 +68,4 @@ window.memories = [
     contributor: "Uma Mann",
     relation: "Sample Collection Manual - Project X"
   },
-
-
 ];

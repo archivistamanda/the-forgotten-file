@@ -223,6 +223,10 @@ function showScenario(id) {
   answered = false;
 
   unlockChapterMemories(id);
+  // Unlock descriptive memory when mem-02 is reached.
+if (id === "mem-02") {
+  unlockDescriptiveMemory();
+}
 
   chapterEl.textContent = scenario.chapter;
   titleEl.textContent = scenario.title;
@@ -418,16 +422,20 @@ function showScenario(id) {
         // Remember selected choice
         selectedChoices[id].push(choice.id);
         // Apply preservation state changes
-applyChoiceState(choice);
+        applyChoiceState(choice);
+
 
         // ==========================================
         // TRACK BUILDING AND WOODS VISITS
         // ==========================================
 
-        const scenarioNumber = Number(id.replace("scenario-", ""));
+        const scenarioNumber = Number(
+          id.replace("scenario-", "")
+        );
 
-        if (scenarioNumber >= 7 && scenarioNumber <= 11) {
-          const selectedText = answer.trim().toLowerCase();
+        if (scenarioNumber >= 6 && scenarioNumber <= 11) {
+
+          const selectedText = choice.text.trim().toLowerCase();
 
           if (selectedText.includes("building")) {
             visitedBuilding = true;
@@ -436,6 +444,9 @@ applyChoiceState(choice);
           if (selectedText.includes("woods")) {
             visitedWoods = true;
           }
+
+          console.log("Building visited:", visitedBuilding);
+          console.log("Woods visited:", visitedWoods);
         }
         // Other scenarios allow only one answer
         if (id !== "scenario-03") {
@@ -478,6 +489,41 @@ applyChoiceState(choice);
       return;
     }
 
+
+    function trackLocationChoice(choice, scenarioId) {
+
+      const scenarioNumber = Number(
+        scenarioId.replace("scenario-", "")
+      );
+
+      // Include Scenario 06, where the first location is selected.
+      if (scenarioNumber < 6 || scenarioNumber > 11) {
+        return;
+      }
+
+      const selectedText = choice.text.trim().toLowerCase();
+
+      if (selectedText.includes("building")) {
+        visitedBuilding = true;
+      }
+
+      if (
+        selectedText.includes("woods") ||
+        selectedText.includes("woodland") ||
+        selectedText.includes("forest")
+      ) {
+        visitedWoods = true;
+      }
+
+      console.log("Location choice recorded:", {
+        scenario: scenarioId,
+        choice: choice.text,
+        visitedBuilding,
+        visitedWoods
+      });
+    }
+
+
     // ==========================================
     // STANDARD BUTTON CHOICE
     // ==========================================
@@ -511,6 +557,14 @@ applyChoiceState(choice);
         return;
       }
 
+      // handleChoice(choice);
+      trackLocationChoice(choice, id);
+      console.log("BUTTON CLICKED:", {
+        scenario: id,
+        choiceId: choice.id,
+        choiceText: choice.text
+      });
+
       // Other scenarios allow only one answer
       if (!isScenario03 && answered) {
         return;
@@ -520,7 +574,7 @@ applyChoiceState(choice);
       selectedChoices[id].push(choice.id);
 
       // Apply preservation state changes
-applyChoiceState(choice);
+      applyChoiceState(choice);
 
       // Disable the buttons for this question/scenario
       if (isScenario03) {
@@ -957,6 +1011,7 @@ function initializeScoreModal() {
 
 
 function renderMemoryProfile() {
+
   const memoryList = document.getElementById("memoryList");
 
   if (!memoryList) {
@@ -977,6 +1032,7 @@ function renderMemoryProfile() {
   }
 
   memories.forEach(memory => {
+
     const card = document.createElement("div");
     card.className = "card mb-3 response-metadata";
 
@@ -989,90 +1045,144 @@ function renderMemoryProfile() {
 
     body.appendChild(title);
 
-    // Preserve the original descriptive metadata fields.
-    const descFields = [
-      ["dc.title", memory.title],
-      ["dc.creator", memory.creator],
-      ["dc.contributor", memory.contributor],
-      ["dc.relation", memory.relation],
-    ];
+    // ==========================================
+    // DESCRIPTIVE METADATA: DUBLIN CORE ONLY
+    // ==========================================
 
-    // Additional preservation metadata fields.
-    const preservationFields = [
-      ["premis:originalName", memory.originalName],
-      ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
-      ["premis:eventType", memory.dateType],
-      ["premis:eventDateTime", memory.dateModified],
-      ["premis:eventDetail", memory.eventDetail],
-      ["premis:agent", memory.agent],
-      ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
-      ["premis:messageDigest", memory.checksum],
-    ];
+    if (["mem-02", "mem-04", "mem-05"].includes(memory.id)) {
 
-    // Complete preservation metadata fields.
-    const preservationCompleteFields = [
-      ["premis:originalName", memory.originalName],
-      ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
+      const descriptiveFields = [
+        ["dc.title", memory.title],
+        ["dc.creator", memory.creator],
+        ["dc.contributor", memory.contributor],
+        ["dc.relation", memory.relation]
+      ];
 
-      ["premis:formatName", memory.formatName],
-      ["premis:formatVersion", memory.formatVersion],
-      ["premis:formatRegistryName", memory.formatRegistry],
-      ["premis:formatRegistryKey", memory.puid],
+      descriptiveFields.forEach(([label, value]) => {
 
-      ["premis:eventType", memory.transcode],
-      ["premis:eventDateTime", memory.dateModified],
-      ["premis:eventDetail", memory.eventDetail],
-      ["premis:eventOutcome", memory.eventOutcome],
+        if (value == null || value === "") return;
 
-      ["premis:agent", memory.agent],
-      ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
-      ["premis:messageDigest", memory.checksum]
-    ];
+        const paragraph = document.createElement("p");
+        paragraph.className = "card-text";
 
-    // Display the original descriptive metadata.
-    descFields.forEach(([label, value]) => {
-      if (value == null || value === "") return;
+        const strong = document.createElement("strong");
+        strong.textContent = `${label}: `;
 
-      const paragraph = document.createElement("p");
-      paragraph.className = "card-text";
+        const span = document.createElement("span");
+        span.textContent = String(value);
 
-      const strong = document.createElement("strong");
-      strong.textContent = `${label}: `;
+        paragraph.append(strong, span);
+        body.appendChild(paragraph);
+      });
+    }
 
-      const span = document.createElement("span");
-      span.textContent = String(value);
 
-      paragraph.append(strong, span);
-      body.appendChild(paragraph);
-    });
+    // ==========================================
+    // ORIGINAL PRESERVATION METADATA: mem-01
+    // ==========================================
 
-    const selectedPreservationFields =
-      memory.id === "mem-03"
-        ? preservationCompleteFields
-        : preservationFields;
+    if (memory.id === "mem-01") {
 
-    selectedPreservationFields.forEach(([label, value]) => {
+      const fields = [
 
-      const paragraph = document.createElement("p");
-      paragraph.className = "card-text";
+        // Original file information
+        ["premis:originalName", memory.originalName],
+        ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
 
-      const strong = document.createElement("strong");
-      strong.textContent = `${label}: `;
+        // File characteristics
+        ["premis:objectCategory", memory.dataType],
+        ["premis:formatDesignation", memory.extensionType],
 
-      const span = document.createElement("span");
-      span.textContent =
-        value == null || value === ""
-          ? "Not recorded"
-          : String(value);
+        // File modification event
+        ["premis:eventType", memory.dateType],
+        ["premis:eventDateTime", memory.dateModified],
+        ["premis:eventDetail", memory.eventDetail],
 
-      paragraph.append(strong, span);
-      body.appendChild(paragraph);
-    });
+        // Agent information
+        ["premis:agent", memory.agent],
+        ["premis:agentType", memory.agentType],
+
+        // Checksum information
+        ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
+        ["premis:messageDigest", memory.checksum]
+
+      ];
+
+      renderMetadataFields(fields, body);
+    }
+
+
+    // ==========================================
+    // COMPLETED PRESERVATION METADATA: mem-03
+    // ==========================================
+
+    if (memory.id === "mem-03") {
+
+      const fields = [
+        // Original file information
+        ["premis:originalName", memory.originalName],
+        ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
+
+        // File format information
+        ["premis:formatName", memory.formatName],
+        ["premis:formatVersion", memory.formatVersion],
+        ["premis:formatRegistryName", memory.formatRegistry],
+        ["premis:formatRegistryKey", memory.puid],
+
+        ["premis:objectCategory", memory.dataType],
+        ["premis:formatDesignation", memory.extensionType],
+
+        // Preservation event information
+        ["premis:eventType", memory.transcode],
+        ["premis:eventDateTime", memory.dateModified],
+        ["premis:eventDetail", memory.eventDetail],
+        ["premis:eventOutcome", memory.eventOutcome],
+
+        // Agent information
+        ["premis:agent", memory.agent],
+        ["premis:agentType", memory.agentType],
+
+        // Checksum information
+        ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
+        ["premis:messageDigest", memory.checksum]
+      ];
+
+      renderMetadataFields(fields, body);
+    }
+
 
     card.appendChild(body);
     memoryList.appendChild(card);
+
   });
 }
+
+// ==========================================
+// REUSABLE METADATA FIELD RENDERER
+// ==========================================
+
+function renderMetadataFields(fields, container) {
+
+  fields.forEach(([label, value]) => {
+
+    const paragraph = document.createElement("p");
+    paragraph.className = "card-text";
+
+    const strong = document.createElement("strong");
+    strong.textContent = `${label}: `;
+
+    const span = document.createElement("span");
+    span.textContent =
+      value == null || value === ""
+        ? "Not recorded"
+        : String(value);
+
+    paragraph.append(strong, span);
+    container.appendChild(paragraph);
+  });
+}
+
+
 
 // ==========================================
 // UNLOCK CHAPTER MEMORIES
@@ -1093,61 +1203,88 @@ function unlockCompletedPreservationMemory() {
     return;
   }
 
+  // Remove the original preservation memory.
   window.collectedMemories =
     window.collectedMemories.filter(
       memory => memory.id !== "mem-01"
     );
 
-  if (
-    !window.collectedMemories.some(
-      memory => memory.id === "mem-03"
-    )
-  ) {
-    window.collectedMemories.push(completedMemory);
-  }
+  // Prevent duplicate completed memories.
+  window.collectedMemories =
+    window.collectedMemories.filter(
+      memory => memory.id !== "mem-03"
+    );
 
-  console.log("Completed preservation profile unlocked.");
+  // Add the completed preservation memory.
+  window.collectedMemories.push(completedMemory);
+
+  console.log("Memory profile updated:", window.collectedMemories);
+
+  renderMemoryProfile();
 }
+
+
 // ==========================================
 // SELECT DESCRIPTIVE MEMORY
 // ==========================================
-
-
 function unlockDescriptiveMemory() {
 
-  if (descriptiveMemoryLocked) return;
+  if (descriptiveMemoryLocked) {
+    console.log("Descriptive memory already locked.");
+    return;
+  }
 
-  const sourceMemories = window.memories || [];
-
-  let selectedMemoryId;
+  let selectedMemoryId = null;
 
   if (visitedBuilding && visitedWoods) {
     selectedMemoryId = "mem-02";
-  } else if (visitedWoods) {
-    selectedMemoryId = "mem-05";
-  } else {
+  } 
+  else if (visitedBuilding) {
     selectedMemoryId = "mem-04";
+  } 
+  else if (visitedWoods) {
+    selectedMemoryId = "mem-05";
   }
 
-  const selectedMemory = sourceMemories.find(
+  console.log("Selecting descriptive memory:", {
+    visitedBuilding,
+    visitedWoods,
+    selectedMemoryId
+  });
+
+  if (!selectedMemoryId) {
+    console.error("No descriptive memory could be selected.");
+    return;
+  }
+
+  const selectedMemory = (window.memories || []).find(
     memory => memory.id === selectedMemoryId
   );
 
   if (!selectedMemory) {
-    console.error("Descriptive memory not found:", selectedMemoryId);
+    console.error(
+      "Descriptive memory not found in window.memories:",
+      selectedMemoryId
+    );
     return;
   }
 
+  // Remove previously unlocked descriptive metadata.
   window.collectedMemories =
     window.collectedMemories.filter(
-      memory => !["mem-02", "mem-04", "mem-05"].includes(memory.id)
+      memory =>
+        !["mem-02", "mem-04", "mem-05"].includes(memory.id)
     );
 
+  // Add the correct descriptive metadata.
   window.collectedMemories.push(selectedMemory);
 
   descriptiveMemoryLocked = true;
 
-  console.log("Selected descriptive memory:", selectedMemoryId);
+  console.log("DESCRIPTIVE MEMORY UNLOCKED:", selectedMemory);
+  console.log("ALL COLLECTED MEMORIES:", window.collectedMemories);
+
+  renderMemoryProfile();
 }
 
 function unlockChapterMemories(scenarioId) {
@@ -1155,26 +1292,6 @@ function unlockChapterMemories(scenarioId) {
   const chapterMemoryMap = {
     "scenario-05": ["mem-01"]
   };
-
-  // Scenario 12 permanently determines the descriptive memory.
-  if (scenarioId === "scenario-12") {
-
-    unlockDescriptiveMemory();
-
-    completedMemoryChapters.add(scenarioId);
-
-    return;
-  }
-
-  // Scenario 16 unlocks completed preservation metadata.
-  if (scenarioId === "scenario-16") {
-
-    unlockCompletedPreservationMemory();
-
-    completedMemoryChapters.add(scenarioId);
-
-    return;
-  }
 
   const memoryIds = chapterMemoryMap[scenarioId];
 

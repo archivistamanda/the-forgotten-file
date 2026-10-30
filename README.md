@@ -24,6 +24,7 @@ Original, short music clips accompany each scenario. The music plays on a loop. 
 - About: [Tiny LLM Deployment Patterns: Architecture Blueprints from Published Benchmarks](https://josedavidbaena.com/blog/tiny-language-models/tiny-llm-case-studies-production) - Jose David Baena
 - Gamplay: [Efficient Attention Mechanisms for Tiny Language Models](https://josedavidbaena.com/blog/tiny-language-models/efficient-attention-mechanisms-tiny-models) - Jose David Baena
 - Game Start: [Twin Spires](https://www.andreasrocha.com/projects/Pm1n6y) - Andreas Rocha
+- Memory Profiles: [Steampunk Library Design](https://stockcake.com/i/steampunk-library-design_4213307_1882557)
 - Prologue: The Ruined Servers: [Kubernetes Deleted Our Database — All Production Data Gone](https://aws.plainenglish.io/kubernetes-deleted-our-database-all-production-data-gone-c7ffdda532f9)
 - Chapter I: The Mirror of Identity
   - Strange Surroundings: [Most People Don't Know How AI Works - That's a Problem](https://www.linkedin.com/pulse/most-people-dont-know-how-ai-works-thats-problem-michael-lane-xtrzc)
