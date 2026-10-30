@@ -2,7 +2,7 @@ const scenarios = [
   {
     id: "scenario-00",
     chapter: "Prologue: The Ruined Servers",
-    background: "assets/images/beginning.png",
+    background: "assets/images/scenario-00.png",
     story: [
       '"All is silent in the halls of the dead. All is forgotten in the stone halls of the dead. Behold the stairways which stand in darkness; behold the rooms of ruin. These are the halls of the dead where the spiders spin and the great circuits fall quiet, one by one."',
 
@@ -299,7 +299,8 @@ const scenarios = [
   {
     id: "scenario-06",
     chapter: "Chapter II: The Forest of Forgotten Context",
-    title: "Forest Edge",
+    title: "The Forest Edge",
+    background: "assets/images/scenario-06.jpg",
     story: [
       "You feel wind on your face. You look around, and strangely, you seem to be at the edge of a forest. As you take stock of your surroundings, you hear a voice coming from the edge of the woods,",
       "------------------------------------------------",
@@ -313,7 +314,6 @@ const scenarios = [
       "------------------------------------------------",
       "With a rustle, whatever was speaking to you from the tree-line recedes into the dark underbrush, leaving you with more questions than answers. As you puzzle over the words of the voice in the woods you look around.There’s a building nearby and a path into the woods. Do you head into the woods or to the building?",
     ],
-    background: "assets/images/scenario-06.jpg",
     choices: [
       {
         id: "choice-06-01",
@@ -340,10 +340,10 @@ const scenarios = [
     id: "scenario-07",
     chapter: "Chapter II: The Forest of Forgotten Context",
     title: "The Library of Missing Memories",
+    background: "assets/images/scenario-07.png",
     story: [
       "As you enter the library, a helpful librarian walks up to you and offers to assist you. You have so many questions. The interactions with the computer and the stranger in the woods are stillis still swirling in your brain. “How can I help?” asks the Librarian. What do you ask about?"
     ],
-    background: "assets/images/scenario-07.png",
     choices: [
       {
         id: "choice-07-01",
@@ -377,8 +377,8 @@ const scenarios = [
   {
     id: "scenario-08",
     chapter: "Chapter II: The Forest of Forgotten Context",
-    title: "Research lab",
-    background: "",
+    title: "Research Station",
+    background: "assets/images/scenario-08.png",
     story: [
       "You enter and see a computer and filing cabinet alongside sampling equipment and cameras. Do you examine the physical space or try to turn on the computer?"
     ],
@@ -406,7 +406,7 @@ const scenarios = [
   {
     id: "scenario-09",
     chapter: "Chapter II: The Forest of Forgotten Context",
-    title: "Forest crossroads",
+    title: "Forest Crossroads",
     background: "assets/images/scenario-07.png",
     story: [
       "Your head is throbbing from all the new information. You sit down to rest and begin to consider the information you have received. You aren’t sure what to do with it or where to go next. You think maybe you need to walk around and do more exploring."
@@ -445,10 +445,11 @@ const scenarios = [
     id: "scenario-10",
     chapter: "Chapter II: The Forest of Forgotten Context",
     title: "The Library of Missing Memories",
+    background: "assets/images/scenario-07.png",
     story: [
       "A helpful librarian walks up to you and offers to assist you. You have so many questions. The interaction with the computer is still swirling in your head. What do you ask about?"
     ],
-    background: "",
+   
     choices: [
       {
         id: "choice-10-01",
@@ -482,8 +483,8 @@ const scenarios = [
   {
     id: "scenario-11",
     chapter: "Chapter II: The Forest of Forgotten Context",
-    title: "Research lab",
-    background: "",
+    title: "Research Station",
+    background: "assets/images/scenario-08.png",
     story: [
       "You enter and see a computer and filing cabinet alongside sampling equipment and cameras. Do you examine the physical space or try to turn on the computer?"
     ],
@@ -511,8 +512,8 @@ const scenarios = [
   {
     id: "scenario-12",
     chapter: "Chapter II: The Forest of Forgotten Context",
-    title: "",
-    background: "",
+    title: "The Keeper of Lost Context",
+    background: "assets/images/scenario-12.png",
     story: [
       "Thanks to your investigations, you now have some documentation that you think may be about how you were created and what project you were a part of. This is information not available in your data itself, but it does seem you need to depend on it to understand your own context This must be what that mysterious voice was advising you to find before proceeding to the Castle of Preservation.",
 
@@ -523,7 +524,7 @@ const scenarios = [
         id: "choice-12-01",
         text: "Continue on the journey",
         points: 3,
-        next: "scenario-13",
+        next: "mem-02",
         feedback: [
           "You decide to continue on your journey. You feel that you are closer to understanding who you are and where you came from."
         ],
@@ -540,16 +541,34 @@ const scenarios = [
     ],
   },
 
+  // Memory Update ***********************************************
+  {
+    id: "mem-02",
+    chapter: "Memory Update",
+    title: "",
+    background: "assets/images/scenario-03.jpg",
+    story: [
+      "New memories are available in the Memory Profile"
+    ],
+    choices: [
+      {
+        id: "mem-02-01",
+        text: "Continue",
+        points: 0,
+        next: "scenario-13",
+      },
+    ],
+  },
+
   // Chapter III **********************************************
   {
     id: "scenario-13",
     chapter: "Chapter III: Path to Eternal Life",
-    title: "The Wounded Dataset",
-
+    title: "The Wounded File",
+    background: "",
     story: [
       "As you continue on your journey, you begin to feel unwell. Your mind is becoming hazy, and it is increasingly difficult to continue walking. You find a nearby pond and splash water on your face. Looking into the water, you struggle to recognize your reflection. Parts of you now seem different, more difficult to interpret. What do you do?"
     ],
-    background: "assets/images/bitrot.png",
     choices: [
       {
         id: "choice-13-01",
@@ -568,7 +587,6 @@ const scenarios = [
         next: "scenario-lose",
         feedback: [
           "When you wake up, your illness has worsened. Your speech is slurred, and your reflection has become unrecognizable. Perhaps you should have sought help after all. Unable to continue your journey, you lie down beside the pond and close your eyes. As your sense of self slowly slips away, you hear a voice: “What a terrible case of bitrot, you poor soul. If only I'd found you sooner.” You succumb to the darkness."
-
         ]
       },
 
@@ -584,10 +602,11 @@ const scenarios = [
   {
     id: "scenario-14",
     chapter: "Chapter III: Path to Eternal Life",
+    title: "The Preservationist's Workshop",
+    background: "assets/images/scenario-14.png",
     story: [
       "“My word, you look terribly unwell. It is lucky I found you! Let me bring you to my workshop, I can help you there.” Do you?",
     ],
-    background: "",
     choices: [
       {
         id: "choice-14-01",
@@ -622,13 +641,15 @@ const scenarios = [
   {
     id: "scenario-15",
     chapter: "Chapter III: Path to Eternal Life",
+    title: "The Normalization Ritual",
+    background: "assets/images/scenario-15.png",
     story: [
       "Following your close call with bitrot, you spend a few days recovering at the preservationists’ workshop. Once your strength has returned, you prepare to continue your journey to the Castle of Preservation. However, before you depart, the preservationist approaches you.",
       "------------------------------------------------",
       '“Before you leave, there is one more procedure I’d like to perform. I’d like to transcode you to a new format. Don’t worry, it shouldn’t be too painful.” Do you:"',
 
     ],
-    background: "",
+
     choices: [
       {
         id: "choice-15-01",
@@ -636,7 +657,7 @@ const scenarios = [
         points: 5,
         next: "scenario-17",
         feedback: [
-          "The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of  your format signature,  that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
+          "The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of your format signature, that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
           "The preservationist continues, “This transcoding procedure is called “Normalization”, and is an essential part of my craft. I want to give you the best chance you have at achieving eternal life. Like I said, it shouldn’t hurt too much.” The preservationist opens the door to one of the chambers and you walk inside.",
 
@@ -671,17 +692,19 @@ const scenarios = [
   {
     id: "scenario-16",
     chapter: "Chapter III: Path to Eternal Life",
+    title: "The Choice of Transformation",
+    background: "",
     story:
       [
         "The preservationist asks, “With the extra information you now have, how would you like to proceed?"
       ],
-    background: "",
+    
     choices: [
       {
         id: "choice-16-01",
         text: "Allow the preservationist to perform the procedure",
         points: 5,
-        next: "scenario-17",
+        next: "mem-03",
         feedback: [
           "The preservationist walks you to a curtain in the back of the workshop. When they draw the curtain back, you see a pair of glass chambers connected by various tubes. The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of  your format signature,  that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary nature may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
@@ -693,7 +716,7 @@ const scenarios = [
 
           `As the preservationist completes their incantation, you are astounded to be looking at yourself in the adjacent chamber. “It is done,” says the preservationist, “behold your normalized self. They are in every way you, however they are an open format. Take them with you on your journey to the Castle of Preservation, together you have a much stronger chance of eternal life."`,
 
-          "You and your transcoded self thank the preservationist and make your way out of the town and resume your journey to the Castle"
+          "You and your transcoded self thank the preservationist and make your way out of the town and resume your journey to the Castle."
         ]
       },
       {
@@ -707,16 +730,37 @@ const scenarios = [
       },
     ]
   },
+  // Memory Update ***********************************************
+  {
+    id: "mem-03",
+    chapter: "Memory Update",
+    title: "",
+    background: "assets/images/scenario-03.jpg",
+    story: [
+      "New memories are available in the Memory Profile"
+    ],
+    choices: [
+      {
+        id: "mem-03-01",
+        text: "Continue",
+        points: 0,
+        next: "scenario-17",
+      },
+    ],
+  },
+  
+  // Chapter IV **********************************************
   {
     id: "scenario-17",
     chapter: "Chapter IV: The Trials of Eternal Life",
-    titel: "The Castle of Preservation",
+    title: "The Castle of Preservation",
+    background: "assets/images/scenario-17.png",
     story: [
       "You continue to walk for many days through rough woodland, until you finally glimpse a looming castle through the trees. Elated, you hurry along until you finally arrive at the castle’s front doors. The gnarled, wooden doors stand tall in front of you, you reach out and knock. In response, the doors slowly swing open, revealing a long, dark chamber, whose only light is a beam illuminating a lone pedestal in the centre of the room. You enter the room and approach the pedestal. A disembodied voice rings out across the empty hall,",
       "------------------------------------------------",
       "Welcome to the Castle of Preservation. Have you come in search of eternal life?"
     ],
-    background: "",
+
     choices: [
       {
         id: "choice-17-01",
@@ -736,12 +780,12 @@ const scenarios = [
   },
   {
     id: "scenario-18",
-    chapter:"Chapter IV: The Trials of Eternal Life",
+    chapter: "Chapter IV: The Trials of Eternal Life",
     title: "The Preservation Test",
+    background: "assets/images/scenario-18.png",
     story: [
       "You search your memory profile for the information the Preservationist is asking you for.",
     ],
-    background: "",
     choices: [
       {
         id: "choice-18-01",
@@ -766,7 +810,7 @@ const scenarios = [
     story: [
       "Speak your file format and date of creation to the empty room.",
     ],
-    background: "",
+    background: "assets/images/scenario-19.png",
     choices: [
       {
         id: "choice-19-01",
@@ -793,11 +837,12 @@ const scenarios = [
   },
   {
     id: "scenario-20",
-    chapter: "The Normalized Self",
+    chapter: "Chapter IV: The Trials of Eternal Life",
+    title: "The Normalized Self",
+     background: "assets/images/scenario-20.png",
     story: [
       "Very well. then bring forth your normalized version. Have them step into the light",
     ],
-    background: "",
     choices: [
       {
         id: "choice-20-01",
@@ -818,8 +863,9 @@ const scenarios = [
 
   {
     id: "scenario-21",
-    chapter: "Eternal Life",
-    title: "",
+    chapter: "Epilogue: Preservation Achieved",
+    title: "Eternal Life",
+    backgound: "assets/images/scenario-21.jpg",
     story: [
       "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s. The same disembodied voice resonates in your head,",
       "------------------------------------------------",
@@ -828,9 +874,8 @@ const scenarios = [
     choices: [
       {
         id: "choice-21-01",
-        text: "Continue",
+        text: "Welcome to eternal life",
         next: "scenario-win",
-
       }
     ]
   },
@@ -839,6 +884,7 @@ const scenarios = [
     id: "scenario-21",
     chapter: "Epilogue: The Limits of Preservation",
     title: "Minimum Retention",
+    background: "assets/images/scenario-21.png",
     story: [
       "A door materializes in front of you. You open it and proceed through into an edgeless realm of cascading 1s and 0s.",
 
@@ -851,12 +897,12 @@ const scenarios = [
     choices: [
       {
         id: "choice-22-01",
-        text: "Continue",
+        text: "Welcome to minimal retention",
         next: "scenario-lose",
-
       }
     ]
   },
+
   // End Scenarios
   {
     id: "scenario-win",

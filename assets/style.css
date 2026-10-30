@@ -141,6 +141,19 @@ h2 {
 
 
 /* -----------------------------------
+ Memory Modal
+----------------------------------- */
+.response-item {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  gap: 12px;
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 8px solid #E8D18A;
+}
+/* -----------------------------------
   Score Modal
 ----------------------------------- */
 .response-item {

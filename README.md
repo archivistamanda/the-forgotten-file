@@ -4,7 +4,7 @@
 By personifying a digital file and portraying its journey toward preservation, the story highlights the importance of context and the crucial role it plays in determining preservation pathways. It equally conveys the challenges and significance of protecting digital information for future generations. Ultimately, it reminds us that digital files have a story worth saving and that preserving our digital heritage is a shared responsibility.
 
 ## Gameplay
-![The scenario the mirror within from chapter one ](/assets/images/scenario-screenshot.png)
+![The scenario the mirror within from chapter one](/assets/images/about_images/scenario-screenshot.png)
 The game is a choice-driven, text-based adventure in which players guide a forgotten file through a mysterious digital world. Through narrative passages, interactive decisions, and branching scenarios, players uncover clues about the protagonist's identity and explore themes of digital preservation, memory, and data corruption.
 
 Gameplay revolves around reading the story and selecting responses to the situations the protagonist encounters. Each scenario presents the player with a set of choices, ranging from investigating unfamiliar objects to interacting with mysterious computer systems and deciding how to respond to dangerous situations. The consequences of these decisions are communicated through narrative feedback, allowing the story to react to the player's actions.
@@ -23,14 +23,29 @@ Original, short music clips accompany each scenario. The music plays on a loop. 
 ## Image Credits
 - About: [Tiny LLM Deployment Patterns: Architecture Blueprints from Published Benchmarks](https://josedavidbaena.com/blog/tiny-language-models/tiny-llm-case-studies-production) - Jose David Baena
 - Gamplay: [Efficient Attention Mechanisms for Tiny Language Models](https://josedavidbaena.com/blog/tiny-language-models/efficient-attention-mechanisms-tiny-models) - Jose David Baena
-- Game Start: 
+- Game Start: [Twin Spires](https://www.andreasrocha.com/projects/Pm1n6y) - Andreas Rocha
 - Prologue: The Ruined Servers: [Kubernetes Deleted Our Database — All Production Data Gone](https://aws.plainenglish.io/kubernetes-deleted-our-database-all-production-data-gone-c7ffdda532f9)
-- Chapter 1: The Mirror of Identity
-  - Strange Surroundings
-  - A Voice in the Machine
-  - The Mirror Within
-- Chapter 2: The Forest of Forgotten Context
-- Chapter 3: The Path to Eternal Life
+- Chapter I: The Mirror of Identity
+  - Strange Surroundings: [Most People Don't Know How AI Works - That's a Problem](https://www.linkedin.com/pulse/most-people-dont-know-how-ai-works-thats-problem-michael-lane-xtrzc)
+  - A Voice in the Machine: [Post-Apocalyptic Abandoned Computer Terminal Desktop Wallpaper](https://sweezy-wallpapers.com/wallpapers/post-apocalyptic-abandoned-computer-terminal-desktop-wallpaper)
+  - The Mirror Within: [Grungy Vintage Computer Lab Dystopian Aesthetic Desktop Wallpaper](https://sweezy-wallpapers.com/wallpapers/grungy-vintage-computer-lab-dystopian-aesthetic-desktop-wallpaper)
+- Chapter II: The Forest of Forgotten Context
+  - The Forest Edge: [Forest Gate](https://www.andreasrocha.com/projects/O3oz2k) - Andreas Rocha
+  - The Library of Missing Memories: [The Art of Exploration: Discovering Hidden Secrets in Fantasy Worlds](https://www.funcrow.com/article/the-art-of-exploration-discovering-hidden-secrets-in-fantasy-worlds)
+  - Research Station: [Cluttered Office at Night](https://www.andreasrocha.com/projects/QrmybZ) - Andreas Rocha
+  - Forest Crossroads
+  - The Keeper of Lost Context: [The Studio](https://www.andreasrocha.com/projects/Ez25aA) - Andreas Rocha
+- Chapter III: The Path to Eternal Life
+  - The Preservationist's Workshop: [Steampunk Lamp Workshop](https://stockcake.com/i/steampunk-lamp-workshop_4153674_1863675)
+  - The Normalization Ritual: [Using Elixir with Apache Iceberg Through DuckDB](https://medium.com/@ndrluis/using-elixir-with-apache-iceberg-through-duckdb-2f3ce915e085)
+- Chapter IV: The Trials of Eternal Life
+  - The Preservation Test: [Vaerith the Last Throught Person](https://www.worldanvil.com/w/the-calyra-zoietcosa/a/vaerith-the-last-thought-person)
+  - The Identity Challenge: [Flames of Defiance](https://www.tryspellbound.com/app/story/992018/edit)
+  - The Normalized Self: [Dark Crypt Dungeon](https://tensor.art/images/677517583551031864?post_id=677517587841804863)
+- Epilogue: Preservation Achieved
+  - Eternal Life: [How to Build a Salesforce Portal with AI in 5 Easy Steps](https://medium.com/%40gpgldn/how-to-build-a-salesforce-portal-with-ai-in-5-easy-steps-c6615bdff815)
+- Epilogue: The Limits of Preservation
+  - Minimum Retention: [HP Lovecraft: The Genius of Horror](https://steampunkstore.fr/en/blogs/steampunk-blog-2/hp-lovecraft-the-genius-of-horror-1)
 
 ## Creators
 This game was loving ❤️ made by:

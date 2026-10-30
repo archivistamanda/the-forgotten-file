@@ -574,6 +574,38 @@ async function loadModals() {
     console.error("Error loading modals:", error);
   }
 }
+// ==========================================
+// ADVANCE TO THE NEXT SCENARIO
+// ==========================================
+function advanceScenario(choice, scenarioId) {
+  if (scenarioId === "scenario-03") {
+    const scenario03 = scenarios.find(
+      item => item.id === "scenario-03"
+    );
+
+    if (!scenario03) {
+      console.error("Scenario 03 not found.");
+      return;
+    }
+
+    if (currentChoiceIndex < scenario03.choices.length) {
+      showScenario("scenario-03");
+    } else {
+      showScenario("scenario-04");
+    }
+
+    return;
+  }
+
+  // Follow the existing game progression rules.
+  if (score < 1) {
+    showScenario("scenario-lose");
+  } else if (choice.next) {
+    showScenario(choice.next);
+  } else {
+    showScenario("scenario-win");
+  }
+}
 
 // ==========================================
 // RESULTS MODAL
@@ -706,38 +738,32 @@ function showResultModal(choice, scenarioId, playerAnswer = null) {
   modalScore.textContent =
     `${points >= 0 ? "+" : ""}${points} points | Total score: ${score}`;
 
-  // Avoid adding duplicate click listeners each time the modal opens.
+  // ==========================================
+  // MODAL CONTINUE AND DISMISS HANDLING
+  // ==========================================
+  let scenarioAdvanced = false;
+
+  function advanceOnce() {
+    if (scenarioAdvanced) return;
+
+    scenarioAdvanced = true;
+    advanceScenario(choice, scenarioId);
+  }
+
+  // Continue button only closes the modal.
+  // Scenario advancement happens when the modal finishes closing.
   modalContinue.onclick = () => {
-    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-
-    if (scenarioId === "scenario-03") {
-      const scenario03 = scenarios.find(
-        item => item.id === "scenario-03"
-      );
-
-      if (!scenario03) {
-        console.error("Scenario 03 not found.");
-        return;
-      }
-
-      if (currentChoiceIndex < scenario03.choices.length) {
-        showScenario("scenario-03");
-      } else {
-        showScenario("scenario-04");
-      }
-
-      return;
-    }
-
-    // Follow the scenario's next destination.
-    if (score < 1) {
-      showScenario("scenario-lose");
-    } else if (choice.next) {
-      showScenario(choice.next);
-    } else {
-      showScenario("scenario-win");
-    }
+    bootstrap.Modal
+      .getOrCreateInstance(modalEl)
+      .hide();
   };
+
+  // Advance when the modal closes by any supported method.
+  modalEl.addEventListener(
+    "hidden.bs.modal",
+    advanceOnce,
+    { once: true }
+  );
 
   bootstrap.Modal.getOrCreateInstance(modalEl).show();
 }
@@ -792,7 +818,7 @@ function initializeScoreModal() {
     // Render every submitted response.
     responses.forEach(response => {
       const item = document.createElement("div");
-      item.className = "response-item";
+      item.className = "response-metadata";
 
       const text = document.createElement("span");
       text.className = "response-text";
@@ -818,9 +844,7 @@ function initializeScoreModal() {
   });
 }
 
-// ==========================================
-// RENDER MEMORY PROFILE
-// ==========================================
+
 function renderMemoryProfile() {
   const memoryList = document.getElementById("memoryList");
 
@@ -831,7 +855,7 @@ function renderMemoryProfile() {
 
   memoryList.replaceChildren();
 
-  const memories = window.collectedMemories;
+  const memories = window.collectedMemories || [];
 
   if (memories.length === 0) {
     const emptyMessage = document.createElement("p");
@@ -843,28 +867,81 @@ function renderMemoryProfile() {
 
   memories.forEach(memory => {
     const card = document.createElement("div");
-    card.className = "card mb-3 response-item";
+    card.className = "card mb-3 response-metadata";
 
     const body = document.createElement("div");
     body.className = "card-body";
 
-    const title = document.createElement("h5");
+    const title = document.createElement("h3");
     title.className = "card-title";
     title.textContent = memory.name || "Untitled memory";
 
     body.appendChild(title);
 
-    const fields = [
-      ["originalName", memory.orignalName],
-      ["dateCreatedByApplication", memory.dateCreatedByApplication],
-      ["formatName", memory.format],
-      ["formatVersion", memory.version],
-      ["agent", memory.agent],
-      ["messageDigestAlgorithm", memory.checksum_algorithm],
-      ["messageDigest", memory.checksum]
+    // Preserve the original descriptive metadata fields.
+    const descFields = [
+      ["dc.title", memory.title],
+      ["dc.creator", memory.creator],
+      ["dc.contributor", memory.contributor],
+      ["dc.relation", memory.relation],
     ];
 
-    fields.forEach(([label, value]) => {
+    // Additional preservation metadata fields.
+    const preservationFields = [
+      ["premis:originalName", memory.originalName],
+      ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
+      ["premis:eventType", memory.dateType],
+      ["premis:eventDateTime", memory.dateModified],
+      ["premis:eventDetail", memory.eventDetail],
+      ["premis:agent", memory.agent],
+      ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
+      ["premis:messageDigest", memory.checksum],
+    ];
+
+    // Complete preservation metadata fields.
+    const preservationCompleteFields = [
+      ["premis:originalName", memory.originalName],
+      ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
+      ["premis:eventType", memory.dateType],
+      ["premis:eventDateTime", memory.dateModified],
+      ["premis:eventDetail", memory.eventDetail],
+      ["premis:agent", memory.agent],
+      ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
+      ["premis:messageDigest", memory.checksum],
+      ["premis:formatName", memory.formatName],
+      ["premis:formatVersion", memory.formatVersion],
+      ["premis:formatRegistryName", memory.formatRegistry],
+      ["premis:formatRegistryKey", memory.puid],
+      ["premis:eventType", memory.transcode],
+      ["premis:eventDetail", memory.eventDetail],
+      ["premis:eventOutcome", memory.eventOutcome],
+    ];
+
+    // Display the original descriptive metadata.
+    descFields.forEach(([label, value]) => {
+      if (value == null || value === "") return;
+
+      const paragraph = document.createElement("p");
+      paragraph.className = "card-text";
+
+      const strong = document.createElement("strong");
+      strong.textContent = `${label}: `;
+
+      const span = document.createElement("span");
+      span.textContent = String(value);
+
+      paragraph.append(strong, span);
+      body.appendChild(paragraph);
+    });
+
+    // Select preservation metadata based on the memory chapter.
+    const selectedPreservationFields =
+      memory.id === "mem-03"
+        ? preservationCompleteFields
+        : preservationFields;
+
+    // Display preservation metadata when present.
+    selectedPreservationFields.forEach(([label, value]) => {
       if (value == null || value === "") return;
 
       const paragraph = document.createElement("p");
@@ -884,6 +961,7 @@ function renderMemoryProfile() {
     memoryList.appendChild(card);
   });
 }
+
 // ==========================================
 // UNLOCK CHAPTER MEMORIES
 // ==========================================
@@ -891,7 +969,9 @@ const completedMemoryChapters = new Set();
 
 function unlockChapterMemories(scenarioId) {
   const chapterMemoryMap = {
-    "scenario-05": ["mem-01"]
+    "scenario-05": ["mem-01"],
+    "scenario-12": ["mem-02"],
+    "scenario-16": ["mem-03"],
   };
 
   const memoryIds = chapterMemoryMap[scenarioId];
