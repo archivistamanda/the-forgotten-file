@@ -30,7 +30,7 @@ window.collectedMemories = [];
 const homeMusic = "../assets/audio/home.mp3";
 
 const scenarioMusic = {
-  "scenario-00": "../assets/audio/scenario-00.mp3",
+  "scenario-00": "assets/audio/scenario-00.mp3",
   "scenario-01": "../assets/audio/scenario-01.mp3",
   "scenario-02": "../assets/audio/scenario-02.mp3",
   "scenario-03": "../assets/audio/scenario-03.mp3",
