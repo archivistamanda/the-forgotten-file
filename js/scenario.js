@@ -300,7 +300,7 @@ const scenarios = [
     id: "scenario-06",
     chapter: "Chapter II: The Forest of Forgotten Context",
     title: "The Forest Edge",
-    background: "assets/images/scenario-06.jpg",
+    background: "assets/images/scenario-06.png",
     story: [
       "You feel wind on your face. You look around, and strangely, you seem to be at the edge of a forest. As you take stock of your surroundings, you hear a voice coming from the edge of the woods,",
       "------------------------------------------------",
@@ -565,7 +565,7 @@ const scenarios = [
     id: "scenario-13",
     chapter: "Chapter III: Path to Eternal Life",
     title: "The Wounded File",
-    background: "",
+    background: "assets/images/scenario-13.png",
     story: [
       "As you continue on your journey, you begin to feel unwell. Your mind is becoming hazy, and it is increasingly difficult to continue walking. You find a nearby pond and splash water on your face. Looking into the water, you struggle to recognize your reflection. Parts of you now seem different, more difficult to interpret. What do you do?"
     ],
@@ -693,12 +693,11 @@ const scenarios = [
     id: "scenario-16",
     chapter: "Chapter III: Path to Eternal Life",
     title: "The Choice of Transformation",
-    background: "",
+    background: "assets/images/scenario-16.png",
     story:
       [
         "The preservationist asks, “With the extra information you now have, how would you like to proceed?"
       ],
-    
     choices: [
       {
         id: "choice-16-01",
@@ -797,7 +796,7 @@ const scenarios = [
       {
         id: "choice-18-02",
         text: "I do not have any associated documentation",
-        points: -5,
+        points: -15,
         next: "scenario-19",
         feedback: "Very well, we will continue with the next steps."
       },
@@ -829,8 +828,8 @@ const scenarios = [
       {
         id: "choice-19-02",
         text: "I do not know my file extension and creation date",
-        points: -5,
-        next: "scenario-22",
+        points: -15,
+        next: "scenario-20",
         feedback: "The runics on the walls are getting dimmer. You start to worry that something might be wrong, but you push your worries aside and continue."
       },
     ]
@@ -854,7 +853,7 @@ const scenarios = [
       {
         id: "choice-20-02",
         text: "I do not have a normalized version of myself",
-        points: -5,
+        points: -15,
         next: "scenario-22",
         feedback: "“Very well. Proceed through the door for your final assessment.”"
       },

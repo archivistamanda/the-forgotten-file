@@ -33,13 +33,14 @@ Original, short music clips accompany each scenario. The music plays on a loop. 
   - The Forest Edge: [Forest Gate](https://www.andreasrocha.com/projects/O3oz2k) - Andreas Rocha
   - The Library of Missing Memories: [The Art of Exploration: Discovering Hidden Secrets in Fantasy Worlds](https://www.funcrow.com/article/the-art-of-exploration-discovering-hidden-secrets-in-fantasy-worlds)
   - Research Station: [Cluttered Office at Night](https://www.andreasrocha.com/projects/QrmybZ) - Andreas Rocha
-  - Forest Crossroads
+  - Forest Crossroads: [Fablecraft - Into the Woods](https://www.andreasrocha.com/projects/Ze4nK1) - Andreas Rocha
   - The Keeper of Lost Context: [The Studio](https://www.andreasrocha.com/projects/Ez25aA) - Andreas Rocha
 - Chapter III: The Path to Eternal Life
+  - The Wounded File: [First Rays](https://www.andreasrocha.com/projects/O9rVb) - Andreas Rocha
   - The Preservationist's Workshop: [Steampunk Lamp Workshop](https://stockcake.com/i/steampunk-lamp-workshop_4153674_1863675)
   - The Normalization Ritual: [Using Elixir with Apache Iceberg Through DuckDB](https://medium.com/@ndrluis/using-elixir-with-apache-iceberg-through-duckdb-2f3ce915e085)
 - Chapter IV: The Trials of Eternal Life
-  - The Preservation Test: [Vaerith the Last Throught Person](https://www.worldanvil.com/w/the-calyra-zoietcosa/a/vaerith-the-last-thought-person)
+  - The Preservation Test: [Reader's Hall](https://www.andreasrocha.com/projects/8eK2nw) - Andreas Rocha
   - The Identity Challenge: [Flames of Defiance](https://www.tryspellbound.com/app/story/992018/edit)
   - The Normalized Self: [Dark Crypt Dungeon](https://tensor.art/images/677517583551031864?post_id=677517587841804863)
 - Epilogue: Preservation Achieved
