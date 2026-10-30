@@ -1,7 +1,7 @@
 window.memories = [
   {
     id: "mem-01",
-    name:"Preservation Metadata",
+    name: "Preservation Metadata",
     originalName: "observations_20021009",
     dateCreatedByApplication: "2002-10-09",
     dateType: "file modification",
@@ -17,22 +17,55 @@ window.memories = [
   },
   {
     id: "mem-02",
-    name:"Descriptive Metadata",
+    name: "Descriptive Metadata",
     title: "Project X",
     creator: "Taylor X. Tang",
     contributor: "Uma Mann",
-    relation: "Sample Collection Manual"
+    relation: "Sample Collection Manual - Project X"
   },
   {
     id: "mem-03",
-    name:"Preservation Metadata",
+    name: "Preservation Metadata",
+
+    // Original file information
+    originalName: "observations_20021009.xls",
+    dateCreatedByApplication: "2002-10-09",
+
+    // File format information
     formatName: "Microsoft Excel 97-2003 Workbook",
     formatVersion: "97-2003",
     formatRegistry: "PRONOM",
     puid: "fmt/61",
+
+    // Preservation event information
+    dateType: "normalization",
+    dateModified: "2002-10-15",
     transcode: "normalization",
     eventDetail: "Preservationist normalized the Microsoft Excel 97-2003 Workbook to Comma Separated Value (csv)",
-    eventOutcome: "success"
+    eventOutcome: "success",
+
+    // Agent information
+    agent: "Taylor X. Tang",
+    agentType: "person",
+
+    // Checksum information
+    checksum_algorithm: "sha256",
+    checksum: "522164c274d28b1e443e56821b1da13515d24d1525d8e75ebae5d357d2f84aec"
   },
- 
+  {
+    id: "mem-04",
+    name: "Descriptive Metadata",
+    title: "Project X",
+    creator: "Taylor X. Tang",
+  },
+
+  {
+    id: "mem-05",
+    name: "Descriptive Metadata",
+    creator: "Taylor X. Tang",
+    contributor: "Uma Mann",
+    relation: "Sample Collection Manual - Project X"
+  },
+
+
 ];

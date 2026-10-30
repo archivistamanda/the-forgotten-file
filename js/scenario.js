@@ -18,7 +18,7 @@ const scenarios = [
 
       "The path ahead is uncertain, and every decision may restore a fragment of its past… or corrupt what little remains.",
 
-      "Will you guide this lost dataset through the forgotten depths of the digital realm, uncover the secrets hidden within its corrupted memories, and help it discover what it truly is?"
+      "Will you guide this lost file through the forgotten depths of the digital realm, uncover the secrets hidden within its corrupted memories, and help it discover what it truly is?"
     ],
     choices: [
       {
@@ -433,7 +433,7 @@ const scenarios = [
       {
         id: "choice-09-03",
         text: "Continue on your journey",
-        points: 3,
+        points: -3,
         next: "scenario-13",
         feedback: [
           "You decide you have enough information. You leave your location and continue to search for help."
@@ -655,7 +655,7 @@ const scenarios = [
         id: "choice-15-01",
         text: "Allow the preservationist to perform the procedure",
         points: 5,
-        next: "scenario-17",
+        next: "mem-03",
         feedback: [
           "The preservationist explains that when you were resting, they conducted some research to understand your XLS extension in more detail. They found out, through an analysis of your format signature, that you are a proprietary format known as Microsoft Excel 97-2003 Workbook (xls), with a persistent identifier of fmt/61. Your proprietary which may jeopardize your quest for eternal life. As such, they’d like to transcode you to an open format. “Generally speaking, open formats are preferred for long-term preservation because their specifications are publicly available, making them easier to access, validate, migrate, and support over time. They also reduce dependence on specific software vendors and lower the risk of files becoming inaccessible due to software or format obsolescence.",
 
@@ -673,10 +673,10 @@ const scenarios = [
       {
         id: "choice-15-02",
         text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
-        points: 0,
-        next: "scenario-lose",
+        points: -8,
+        next: "mem-03",
         feedback: [
-          "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!"
+          "You run away from the workshop and continue on your journey. Maybe the Castle of Preservation can give you a second opinion."
         ]
       },
       {
@@ -693,7 +693,7 @@ const scenarios = [
     id: "scenario-16",
     chapter: "Chapter III: Path to Eternal Life",
     title: "The Choice of Transformation",
-    background: "assets/images/scenario-16.png",
+    background: "assets/images/scenario-15.png",
     story:
       [
         "The preservationist asks, “With the extra information you now have, how would you like to proceed?"
@@ -721,10 +721,10 @@ const scenarios = [
       {
         id: "choice-16-02",
         text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
-        points: 0,
-        next: "scenario-lose",
+        points: -8,
+        next: "mem-03",
         feedback: [
-          "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!"
+          "You run away from the workshop and continue on your journey. Maybe the Castle of Preservation can give you a second opinion."
         ]
       },
     ]
@@ -764,7 +764,7 @@ const scenarios = [
       {
         id: "choice-17-01",
         text: "Yes, I have",
-        points: 0,
+        points: 8,
         next: "scenario-18",
         feedback: "Very well. In order to be granted eternal life, you must present the fruits of your quest. Place your associated documentation on the altar."
       },
@@ -788,7 +788,12 @@ const scenarios = [
     choices: [
       {
         id: "choice-18-01",
-        text: "Place the procedures manual that you took from the lab observation station on the altar.",
+        text: "Place the procedure manual that you took from the lab observation station on the altar.",
+        type: "text",
+        placeholder: "Enter name of procedure manual.",
+        acceptedAnswers: [
+          "Sample Collection Manual - Project X"
+        ],
         points: 5,
         next: "scenario-19",
         feedback: "Excellent. Everything looks in order."

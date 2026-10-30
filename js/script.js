@@ -7,6 +7,13 @@ let score = 0;
 // Track the next question to display in Scenario 03
 let currentChoiceIndex = 0;
 
+// Track visits during Scenarios 07–11.
+let visitedBuilding = false;
+let visitedWoods = false;
+
+// Lock the descriptive memory after Scenario 12.
+let descriptiveMemoryLocked = false;
+
 // Track pagination
 let currentStoryPage = 0;
 
@@ -81,7 +88,7 @@ async function startHomeMusicAutomatically() {
   } catch (error) {
     // Browser may block autoplay.
     musicEnabled = false;
-    console.log("Autoplay blocked; waiting for user interaction.");
+    // console.log("Autoplay blocked; waiting for user interaction.");
   }
 
   updateMusicButton();
@@ -181,7 +188,7 @@ function showScenario(id) {
   // Play the music assigned to this scenario.
   playScenarioMusic(id);
 
-  console.log("Showing scenario:", id);
+  // console.log("Showing scenario:", id);
 
   currentId = id;
   answered = false;
@@ -270,14 +277,14 @@ function showScenario(id) {
         )
     );
 
-    console.log(
-      "Scenario 09 selected response:",
-      scenario6Choice
-    );
-    console.log(
-      "Scenario 09 choices displayed:",
-      choicesToDisplay.map(choice => choice.text)
-    );
+    // console.log(
+    //   "Scenario 09 selected response:",
+    //   scenario6Choice
+    // );
+    // console.log(
+    //   "Scenario 09 choices displayed:",
+    //   choicesToDisplay.map(choice => choice.text)
+    // );
   }
 
   if (id === "scenario-03") {
@@ -382,6 +389,23 @@ function showScenario(id) {
         // Remember selected choice
         selectedChoices[id].push(choice.id);
 
+        // ==========================================
+        // TRACK BUILDING AND WOODS VISITS
+        // ==========================================
+
+        const scenarioNumber = Number(id.replace("scenario-", ""));
+
+        if (scenarioNumber >= 7 && scenarioNumber <= 11) {
+          const selectedText = answer.trim().toLowerCase();
+
+          if (selectedText.includes("building")) {
+            visitedBuilding = true;
+          }
+
+          if (selectedText.includes("woods")) {
+            visitedWoods = true;
+          }
+        }
         // Other scenarios allow only one answer
         if (id !== "scenario-03") {
           answered = true;
@@ -491,7 +515,27 @@ function showScenario(id) {
         points: Number(choice.points) || 0
       };
 
-      console.log(playerResponses);
+      // ==========================================
+      // SCENARIO 15: PRESERVATIONIST DECISION
+      // ==========================================
+
+      if (id === "scenario-15") {
+
+        const selectedAnswer = choice.text
+          .trim()
+          .toLowerCase();
+
+        if (
+          selectedAnswer.includes(
+            "allow the preservationist to perform the procedure"
+          )
+        ) {
+          // The player approved the procedure.
+          // Replace mem-01 with the completed mem-03 profile.
+          unlockCompletedPreservationMemory();
+        }
+
+      }
 
       // Update score
       score += Number(choice.points) || 0;
@@ -818,7 +862,7 @@ function initializeScoreModal() {
     // Render every submitted response.
     responses.forEach(response => {
       const item = document.createElement("div");
-      item.className = "response-metadata";
+      item.className = "response-item";
 
       const text = document.createElement("span");
       text.className = "response-text";
@@ -902,19 +946,20 @@ function renderMemoryProfile() {
     const preservationCompleteFields = [
       ["premis:originalName", memory.originalName],
       ["premis:dateCreatedByApplication", memory.dateCreatedByApplication],
-      ["premis:eventType", memory.dateType],
-      ["premis:eventDateTime", memory.dateModified],
-      ["premis:eventDetail", memory.eventDetail],
-      ["premis:agent", memory.agent],
-      ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
-      ["premis:messageDigest", memory.checksum],
+
       ["premis:formatName", memory.formatName],
       ["premis:formatVersion", memory.formatVersion],
       ["premis:formatRegistryName", memory.formatRegistry],
       ["premis:formatRegistryKey", memory.puid],
+
       ["premis:eventType", memory.transcode],
+      ["premis:eventDateTime", memory.dateModified],
       ["premis:eventDetail", memory.eventDetail],
       ["premis:eventOutcome", memory.eventOutcome],
+
+      ["premis:agent", memory.agent],
+      ["premis:messageDigestAlgorithm", memory.checksum_algorithm],
+      ["premis:messageDigest", memory.checksum]
     ];
 
     // Display the original descriptive metadata.
@@ -934,15 +979,12 @@ function renderMemoryProfile() {
       body.appendChild(paragraph);
     });
 
-    // Select preservation metadata based on the memory chapter.
     const selectedPreservationFields =
       memory.id === "mem-03"
         ? preservationCompleteFields
         : preservationFields;
 
-    // Display preservation metadata when present.
     selectedPreservationFields.forEach(([label, value]) => {
-      if (value == null || value === "") return;
 
       const paragraph = document.createElement("p");
       paragraph.className = "card-text";
@@ -951,7 +993,10 @@ function renderMemoryProfile() {
       strong.textContent = `${label}: `;
 
       const span = document.createElement("span");
-      span.textContent = String(value);
+      span.textContent =
+        value == null || value === ""
+          ? "Not recorded"
+          : String(value);
 
       paragraph.append(strong, span);
       body.appendChild(paragraph);
@@ -965,35 +1010,134 @@ function renderMemoryProfile() {
 // ==========================================
 // UNLOCK CHAPTER MEMORIES
 // ==========================================
+
 const completedMemoryChapters = new Set();
 
+function unlockCompletedPreservationMemory() {
+
+  const sourceMemories = window.memories || [];
+
+  const completedMemory = sourceMemories.find(
+    memory => memory.id === "mem-03"
+  );
+
+  if (!completedMemory) {
+    console.error("Completed preservation memory not found.");
+    return;
+  }
+
+  window.collectedMemories =
+    window.collectedMemories.filter(
+      memory => memory.id !== "mem-01"
+    );
+
+  if (
+    !window.collectedMemories.some(
+      memory => memory.id === "mem-03"
+    )
+  ) {
+    window.collectedMemories.push(completedMemory);
+  }
+
+  console.log("Completed preservation profile unlocked.");
+}
+// ==========================================
+// SELECT DESCRIPTIVE MEMORY
+// ==========================================
+
+
+function unlockDescriptiveMemory() {
+
+  if (descriptiveMemoryLocked) return;
+
+  const sourceMemories = window.memories || [];
+
+  let selectedMemoryId;
+
+  if (visitedBuilding && visitedWoods) {
+    selectedMemoryId = "mem-02";
+  } else if (visitedWoods) {
+    selectedMemoryId = "mem-05";
+  } else {
+    selectedMemoryId = "mem-04";
+  }
+
+  const selectedMemory = sourceMemories.find(
+    memory => memory.id === selectedMemoryId
+  );
+
+  if (!selectedMemory) {
+    console.error("Descriptive memory not found:", selectedMemoryId);
+    return;
+  }
+
+  window.collectedMemories =
+    window.collectedMemories.filter(
+      memory => !["mem-02", "mem-04", "mem-05"].includes(memory.id)
+    );
+
+  window.collectedMemories.push(selectedMemory);
+
+  descriptiveMemoryLocked = true;
+
+  console.log("Selected descriptive memory:", selectedMemoryId);
+}
+
 function unlockChapterMemories(scenarioId) {
+
   const chapterMemoryMap = {
-    "scenario-05": ["mem-01"],
-    "scenario-12": ["mem-02"],
-    "scenario-16": ["mem-03"],
+    "scenario-05": ["mem-01"]
   };
+
+  // Scenario 12 permanently determines the descriptive memory.
+  if (scenarioId === "scenario-12") {
+
+    unlockDescriptiveMemory();
+
+    completedMemoryChapters.add(scenarioId);
+
+    return;
+  }
+
+  // Scenario 16 unlocks completed preservation metadata.
+  if (scenarioId === "scenario-16") {
+
+    unlockCompletedPreservationMemory();
+
+    completedMemoryChapters.add(scenarioId);
+
+    return;
+  }
 
   const memoryIds = chapterMemoryMap[scenarioId];
 
-  if (!memoryIds || completedMemoryChapters.has(scenarioId)) {
+  if (
+    !memoryIds ||
+    completedMemoryChapters.has(scenarioId)
+  ) {
     return;
   }
 
   const sourceMemories = window.memories || [];
 
   memoryIds.forEach(id => {
-    const memory = sourceMemories.find(item => item.id === id);
+
+    const memory = sourceMemories.find(
+      item => item.id === id
+    );
 
     if (
       memory &&
-      !window.collectedMemories.some(item => item.id === id)
+      !window.collectedMemories.some(
+        item => item.id === id
+      )
     ) {
       window.collectedMemories.push(memory);
     }
   });
 
   completedMemoryChapters.add(scenarioId);
+
 }
 function initializeMemoryProfile() {
   const openButton = document.getElementById(
@@ -1032,6 +1176,12 @@ function restartGame() {
   currentChoiceIndex = 0;
   answered = false;
   currentId = "scenario-00";
+
+  window.collectedMemories = [];
+  completedMemoryChapters.clear();
+  visitedBuilding = false;
+  visitedWoods = false;
+  descriptiveMemoryLocked = false;
 
   localStorage.setItem("health", "0");
   localStorage.setItem("scenarioId", "scenario-00");
