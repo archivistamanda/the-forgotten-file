@@ -27,7 +27,7 @@ window.collectedMemories = [];
 // BACKGROUND MUSIC CONFIGURATION
 // ==========================================
 
-const homeMusic = "../assets/audio/home.mp3";
+const homeMusic = "assets/audio/home.mp3";
 
 const scenarioMusic = {
   "scenario-00": "audio/scenario-00.mp3",
