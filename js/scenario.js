@@ -33,7 +33,7 @@ const scenarios = [
         text: "Leave. I just don't have capacity right now.",
         points: 0,
         next: "scenario-lose",
-        feedback: "You decide the file will be deprioritized. You are already overloaded with a backlog."
+        feedback: "You decide the file will be deprioritized. You are already overloaded with a backlog"
       }
     ]
   },
@@ -103,7 +103,7 @@ const scenarios = [
       },
       {
         id: "choice-02-02",
-        text: "Leave. You are creeped out.",
+        text: "Leave. You are creeped out",
         points: -50,
         next: "scenario-03",
         feedback: [
@@ -1063,7 +1063,7 @@ const scenarios = [
     id: "scenario-conditional-win",
     chapter: "Game Complete",
     title: "A Future Secured, With Limitations",
-    background: "assets/images/scenario-win.png",
+    background: "assets/images/scenario-conditional.png",
     story: [
       "Your journey is complete!",
       "You have successfully reached the archival repository, but your preservation package has some limitations.",

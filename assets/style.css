@@ -1,97 +1,127 @@
+/* -----------------------------------
+   Google Fonts
+----------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* -----------------------------------
    Branding Colours
 ----------------------------------- */
 :root {
-    --brand-primary: #9FC8C6;
-    --brand-secondary:#dec16b;
-    --brand-hover: #467270;
-    --brand-success: #154A4A;
-    --brand-tertiary: #b4f3f1;
+  --brand-primary: #9FC8C6;
+  --brand-hover: #467270;
+  --brand-secondary: #deb94b;
+  --brand-secondary-hover: #e5b627;
+  --brand-tertiary: #b4f3f1;
+  --brand-tertiary-hover: #8eefec;
+  --brand-success: #154A4A;
+  --brand-disabled: #6c757d;
+  --brand-hero: #FBFAFA;
 }
-/* Ensure the container elements occupy full height */
-html, body {
+
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif !important;
- 
-}
-
-p, .form-check-label, button, .modal, li {
   font-size: 14pt;
 }
 
+h2 {
+  font-size: 26pt !important
+}
+
+/* -----------------------------------
+ Buttons
+----------------------------------- */
 .btn-primary {
-  background-color: var(--brand-primary)!important;
+  background-color: var(--brand-primary) !important;
   border-color: var(--brand-primary);
-  color: black;
+  color: #000000;
   font-weight: 700;
 }
 
 .btn-primary:hover {
-  background-color: var(--brand-hover)!important;
+  background-color: var(--brand-hover) !important;
   border-color: var(--brand-hover);
-  color: #fff;
+  color: #ffffff;
   font-weight: 700;
 }
 
-.btn-secondary{
-  background-color: var(--brand-secondary)!important;
+.btn-secondary {
+  background-color: var(--brand-secondary) !important;
   border-color: var(--brand-secondary);
-  color: black;
+  color: #000000;
   font-weight: 700;
 }
 
 .btn-secondary:hover {
-  background-color: #dec16b!important;
-  border-color: #dec16b;
-  color:black;
+  background-color: var(--brand-secondary-hover) !important;
+  background-color: var(--brand-secondary-hover) !important;
+  color: #000000;
   font-weight: 700;
 }
 
-.btn-tertiary{
-  background-color: var(--brand-tertiary)!important;
+.btn-secondary:focus {
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+.btn-tertiary {
+  background-color: var(--brand-tertiary) !important;
   border-color: var(--brand-tertiary);
-  color: black;
+  color: #000000;
   font-weight: 700;
 }
 
-h2 {
-  font-size: 26pt!important
+.btn-tertiary:hover {
+  background-color: var(--brand-tertiary-hover) !important;
+  border-color: var(--brand-tertiary-hover) !important;
+  color: #000000;
+  font-weight: 700;
 }
 
+.btn-tertiary:focus {
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+.bg-primary {
+  background-color: var(--brand-secondary) !important;
+  color: #000000
+}
+
+.btn-primary:disabled {
+  color: #ffffff;
+  background-color: var(--brand-disabled)!important;
+  border-color: var(--brand-disabled)
+}
+
+.btn-success {
+  background-color: var(--brand-success) !important;
+  border-color: var(--brand-success)
+}
+
+/* -----------------------------------
+Backgrounds
+----------------------------------- */
 .hero {
-  background-color: #FBFAFA;
-}
-
-.score {
-  font-size: 20pt;
+  background-color: var(--brand-hero);
 }
 
 .full-page-bg {
-  /* Scale the image proportionally to cover the full viewport */
   background-size: cover;
-  
-  /* Lock the image in place so text scrolls smoothly over it */
   background-attachment: fixed;
-  
-  /* Keep the focus centered horizontally and vertically */
   background-position: center center;
-  
-  /* Prevent the browser from repeating tiles of the image */
   background-repeat: no-repeat;
-  
   min-height: 100vh;
 }
 
-/* Define page-specific image assignments */
 .home-page {
   background-image: url('images/home.png');
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .about-page {
@@ -102,6 +132,9 @@ h2 {
   background-image: url('images/gameplay.png');
 }
 
+/* -----------------------------------
+ Cards
+----------------------------------- */
 #choices {
   display: flex;
   flex-direction: column;
@@ -113,28 +146,15 @@ h2 {
 }
 
 .card-header {
-  background-color: #f8f9fa;
+  background-color: var(--brand-hero)!important;
 }
 
-.bg-primary {
-  background-color: var(--brand-secondary)!important;
-  color: black
-}
-
-.btn-primary:disabled {
-    color: #fff;
-    background-color: #6c757d!important;
-    border-color: #6c757d;
-}
-
-.btn-success {
-  background-color: var(--brand-success)!important; 
-  border-color: var(--brand-success)
-}
-
+/* -----------------------------------
+Results Modal
+----------------------------------- */
 .selection {
   padding: 12px 15px;
-  background-color: #f8f9fa;
+  background-color: var(--brand-hero)!important;
   border-radius: 8px;
   border-left: 8px solid #E8D18A;
 }
@@ -149,20 +169,25 @@ h2 {
   align-items: center; */
   gap: 12px;
   padding: 12px 15px;
-  background-color: #f8f9fa;
+  background-color: var(--brand-hero)!important;;
   border-radius: 8px;
   border-left: 8px solid #E8D18A;
 }
+
 /* -----------------------------------
   Score Modal
 ----------------------------------- */
+.score {
+  font-size: 20pt;
+}
+
 .response-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   padding: 12px 15px;
-  background-color: #f8f9fa;
+  background-color: var(--brand-hero)!important;;
   border-radius: 8px;
   border-left: 8px solid #E8D18A;
 }
@@ -182,12 +207,11 @@ h2 {
   color: #dc3545;
 }
 
-
 .card-image {
   display: flex;
   justify-content: center;
   align-items: center;
- }
+}
 
 .card img {
   max-width: 100%;

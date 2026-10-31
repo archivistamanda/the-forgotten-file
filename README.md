@@ -17,9 +17,6 @@ Player decisions also influence a numerical scoring system. Choices can award or
 ## Memory Profile
 The player’s memory profile will update as they progress through the game and gather information. A notice will appear to let the player know their memory profile was new information. The player may interact with the memory profile at any time by clicking the **Memory Profile** button located at the upper left corner of each scenario.
 
-## Music
-Original, short music clips accompany each scenario. The music plays on a loop. To hear the music, the player must click on the Music on button at the beginning of the game. The music can be turned off at any time by clicking the Music off button.
-
 ## Image Credits
 - About: [Tiny LLM Deployment Patterns: Architecture Blueprints from Published Benchmarks](https://josedavidbaena.com/blog/tiny-language-models/tiny-llm-case-studies-production) - Jose David Baena
 - Gamplay: [Efficient Attention Mechanisms for Tiny Language Models](https://josedavidbaena.com/blog/tiny-language-models/efficient-attention-mechanisms-tiny-models) - Jose David Baena
@@ -44,10 +41,13 @@ Original, short music clips accompany each scenario. The music plays on a loop. 
   - The Preservation Test: [Reader's Hall](https://www.andreasrocha.com/projects/8eK2nw) - Andreas Rocha
   - The Identity Challenge: [Flames of Defiance](https://www.tryspellbound.com/app/story/992018/edit)
   - The Normalized Self: [Dark Crypt Dungeon](https://tensor.art/images/677517583551031864?post_id=677517587841804863)
-- Epilogue: Preservation Achieved
-  - Eternal Life: [How to Build a Salesforce Portal with AI in 5 Easy Steps](https://medium.com/%40gpgldn/how-to-build-a-salesforce-portal-with-ai-in-5-easy-steps-c6615bdff815)
-- Epilogue: The Limits of Preservation
-  - Minimum Retention: [HP Lovecraft: The Genius of Horror](https://steampunkstore.fr/en/blogs/steampunk-blog-2/hp-lovecraft-the-genius-of-horror-1)
+  - Final Assessment: [Noctorunal Riddles](https://nightlywhispers.com/story/nocturnal-riddles)
+- Epilogue: Preservation Achieved: Eternal Life: [How to Build a Salesforce Portal with AI in 5 Easy Steps](https://medium.com/%40gpgldn/how-to-build-a-salesforce-portal-with-ai-in-5-easy-steps-c6615bdff815)
+- Epilogue: Conditional Preservation: The Limits of Certainty: [Icy Peaks](https://www.andreasrocha.com/projects/zx5vDd) - Andreas Rocha  
+- Epilogue: Preservation Unsuccessful: A Lost Identity: [HP Lovecraft: The Genius of Horror](https://steampunkstore.fr/en/blogs/steampunk-blog-2/hp-lovecraft-the-genius-of-horror-1)
+- Mission Accomplished:  [Jellyfish Village](https://www.andreasrocha.com/projects/J9ZA40) - Andreas Rocha
+- A Future Secured, With Limitations: [Returning Home](https://www.andreasrocha.com/projects/DL2ZKR) - Andreas Rocha
+- Mission Incomplete [Overrun!](https://www.andreasrocha.com/projects/dOyGlK) - Andreas Rocha
 
 ## Creators
 This game was loving ❤️ made by:

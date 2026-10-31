@@ -60,142 +60,6 @@ const profileScoreEl = document.getElementById("profile-score");
 window.collectedMemories = [];
 
 // ==========================================
-// BACKGROUND MUSIC CONFIGURATION
-// ==========================================
-
-const homeMusic = "assets/audio/home.mp3";
-
-const scenarioMusic = {
-  "scenario-00": "assets/audio/scenario-00.mp3",
-  // "scenario-01": "../assets/audio/scenario-01.mp3",
-  // "scenario-02": "../assets/audio/scenario-02.mp3",
-  // "scenario-03": "../assets/audio/scenario-03.mp3",
-  // "scenario-04": "../assets/audio/scenario-04.mp3",
-  // "scenario-05": "../assets/audio/scenario-05.mp3"
-};
-
-const backgroundMusic = new Audio();
-
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.3;
-backgroundMusic.preload = "auto";
-
-let currentMusicSource = "";
-let musicEnabled = false;
-
-// Play or switch tracks without automatically enabling music.
-function playMusic(musicFile) {
-  if (!musicFile) return;
-
-  if (currentMusicSource === musicFile) return;
-
-  currentMusicSource = musicFile;
-
-  backgroundMusic.pause();
-  backgroundMusic.src = musicFile;
-  backgroundMusic.currentTime = 0;
-  backgroundMusic.load();
-
-  // Only play if the user has enabled music.
-  if (musicEnabled) {
-    backgroundMusic.play().catch(error => {
-      console.error("Music playback failed:", error);
-    });
-  }
-}
-
-function playHomeMusic() {
-  playMusic(homeMusic);
-}
-
-async function startHomeMusicAutomatically() {
-  musicEnabled = true;
-  playHomeMusic();
-
-  try {
-    await backgroundMusic.play();
-  } catch (error) {
-    // Browser may block autoplay.
-    musicEnabled = false;
-    // console.log("Autoplay blocked; waiting for user interaction.");
-  }
-
-  updateMusicButton();
-}
-function playScenarioMusic(scenarioId) {
-  playMusic(scenarioMusic[scenarioId]);
-}
-
-// ==========================================
-// MUSIC ON/OFF BUTTON
-// ==========================================
-
-function updateMusicButton() {
-  document.querySelectorAll(".music-toggle").forEach(button => {
-    button.textContent = musicEnabled
-      ? "🔊 Music On"
-      : "🔇 Music Off";
-
-    button.setAttribute(
-      "aria-pressed",
-      String(musicEnabled)
-    );
-  });
-}
-
-function initializeMusicToggle() {
-  const musicButtons = document.querySelectorAll(".music-toggle");
-
-  if (musicButtons.length === 0) {
-    console.warn("No .music-toggle buttons found.");
-    return;
-  }
-
-  musicButtons.forEach(button => {
-    // Prevent duplicate click listeners.
-    if (button.dataset.initialized === "true") return;
-
-    button.dataset.initialized = "true";
-
-    button.addEventListener("click", async () => {
-      if (musicEnabled) {
-        musicEnabled = false;
-        backgroundMusic.pause();
-        updateMusicButton();
-        return;
-      }
-
-      musicEnabled = true;
-
-      // Use the track for the current screen.
-      const scenarioPage = document.getElementById("scenario");
-      const isScenarioVisible =
-        scenarioPage && !scenarioPage.classList.contains("d-none");
-
-      const musicFile = isScenarioVisible
-        ? (scenarioMusic[currentId] || homeMusic)
-        : homeMusic;
-
-      if (currentMusicSource !== musicFile) {
-        currentMusicSource = musicFile;
-        backgroundMusic.src = musicFile;
-        backgroundMusic.load();
-      }
-
-      try {
-        await backgroundMusic.play();
-      } catch (error) {
-        musicEnabled = false;
-        console.error("Unable to start music:", error);
-      }
-
-      updateMusicButton();
-    });
-  });
-
-  updateMusicButton();
-}
-// ==========================================
 // MEMORY SCENARIO DETECTION
 // ==========================================
 function isMemoryScenario(scenarioId) {
@@ -214,19 +78,19 @@ function showScenario(id) {
     return;
   }
 
-  // Play the music assigned to this scenario.
-  playScenarioMusic(id);
-
-  // console.log("Showing scenario:", id);
-
   currentId = id;
   answered = false;
 
   unlockChapterMemories(id);
   // Unlock descriptive memory when mem-02 is reached.
-if (id === "mem-02") {
-  unlockDescriptiveMemory();
-}
+  if (id === "mem-02") {
+    unlockDescriptiveMemory();
+  }
+
+  // Replace original preservation memory when mem-03 opens.
+  if (id === "mem-03") {
+    unlockCompletedPreservationMemory();
+  }
 
   chapterEl.textContent = scenario.chapter;
   titleEl.textContent = scenario.title;
@@ -424,7 +288,6 @@ if (id === "mem-02") {
         // Apply preservation state changes
         applyChoiceState(choice);
 
-
         // ==========================================
         // TRACK BUILDING AND WOODS VISITS
         // ==========================================
@@ -489,7 +352,6 @@ if (id === "mem-02") {
       return;
     }
 
-
     function trackLocationChoice(choice, scenarioId) {
 
       const scenarioNumber = Number(
@@ -522,7 +384,6 @@ if (id === "mem-02") {
         visitedWoods
       });
     }
-
 
     // ==========================================
     // STANDARD BUTTON CHOICE
@@ -602,28 +463,6 @@ if (id === "mem-02") {
         text: choice.text,
         points: Number(choice.points) || 0
       };
-
-      // ==========================================
-      // SCENARIO 16: PRESERVATIONIST DECISION
-      // ==========================================
-
-      if (id === "scenario-16") {
-
-        const selectedAnswer = choice.text
-          .trim()
-          .toLowerCase();
-
-        if (
-          selectedAnswer.includes(
-            "allow the preservationist to perform the procedure"
-          )
-        ) {
-          // The player approved the procedure.
-          // Replace mem-01 with the completed mem-03 profile.
-          unlockCompletedPreservationMemory();
-        }
-
-      }
 
       // Update score
       score += Number(choice.points) || 0;
@@ -706,10 +545,10 @@ async function loadModals() {
     console.error("Error loading modals:", error);
   }
 }
+
 // ==========================================
 // ADVANCE TO THE NEXT SCENARIO
 // ==========================================
-
 function advanceScenario(choice, scenarioId) {
 
   // Scenario 03: handle questions one at a time.
@@ -749,9 +588,6 @@ function advanceScenario(choice, scenarioId) {
     showScenario("scenario-win");
   }
 }
-
-
-
 
 function determineEnding(state) {
 
@@ -1009,7 +845,6 @@ function initializeScoreModal() {
   });
 }
 
-
 function renderMemoryProfile() {
 
   const memoryList = document.getElementById("memoryList");
@@ -1048,7 +883,6 @@ function renderMemoryProfile() {
     // ==========================================
     // DESCRIPTIVE METADATA: DUBLIN CORE ONLY
     // ==========================================
-
     if (["mem-02", "mem-04", "mem-05"].includes(memory.id)) {
 
       const descriptiveFields = [
@@ -1075,8 +909,6 @@ function renderMemoryProfile() {
         body.appendChild(paragraph);
       });
     }
-
-
     // ==========================================
     // ORIGINAL PRESERVATION METADATA: mem-01
     // ==========================================
@@ -1110,7 +942,6 @@ function renderMemoryProfile() {
 
       renderMetadataFields(fields, body);
     }
-
 
     // ==========================================
     // COMPLETED PRESERVATION METADATA: mem-03
@@ -1182,8 +1013,6 @@ function renderMetadataFields(fields, container) {
   });
 }
 
-
-
 // ==========================================
 // UNLOCK CHAPTER MEMORIES
 // ==========================================
@@ -1192,9 +1021,7 @@ const completedMemoryChapters = new Set();
 
 function unlockCompletedPreservationMemory() {
 
-  const sourceMemories = window.memories || [];
-
-  const completedMemory = sourceMemories.find(
+  const completedMemory = (window.memories || []).find(
     memory => memory.id === "mem-03"
   );
 
@@ -1203,26 +1030,28 @@ function unlockCompletedPreservationMemory() {
     return;
   }
 
-  // Remove the original preservation memory.
+  // Remove the original and any previous completed record.
   window.collectedMemories =
     window.collectedMemories.filter(
-      memory => memory.id !== "mem-01"
+      memory =>
+        memory.id !== "mem-01" &&
+        memory.id !== "mem-03"
     );
 
-  // Prevent duplicate completed memories.
-  window.collectedMemories =
-    window.collectedMemories.filter(
-      memory => memory.id !== "mem-03"
-    );
-
-  // Add the completed preservation memory.
+  // Insert the complete preservation record.
   window.collectedMemories.push(completedMemory);
 
-  console.log("Memory profile updated:", window.collectedMemories);
+  console.log("Preservation memory replaced:", {
+    remainingOriginal: window.collectedMemories.some(
+      memory => memory.id === "mem-01"
+    ),
+    completedRecord: window.collectedMemories.find(
+      memory => memory.id === "mem-03"
+    )
+  });
 
   renderMemoryProfile();
 }
-
 
 // ==========================================
 // SELECT DESCRIPTIVE MEMORY
@@ -1238,10 +1067,10 @@ function unlockDescriptiveMemory() {
 
   if (visitedBuilding && visitedWoods) {
     selectedMemoryId = "mem-02";
-  } 
+  }
   else if (visitedBuilding) {
     selectedMemoryId = "mem-04";
-  } 
+  }
   else if (visitedWoods) {
     selectedMemoryId = "mem-05";
   }
@@ -1380,11 +1209,8 @@ function restartGame() {
   showScenario(currentId);
 }
 
-function initializeGame() {
-  // Initialize music controls.
-  initializeMusicToggle();
 
-  // Landing page: play the landing music.
+function initializeGame() {
   const journeyButton = document.getElementById("journey");
   const homePage = document.getElementById("home");
   const scenarioPage = document.getElementById("scenario");
@@ -1406,19 +1232,14 @@ function initializeGame() {
       updateScoreDisplay();
       resetGameState();
 
-      // Switch from landing music to scenario-00 music.
       showScenario("scenario-00");
     }, { once: true });
 
-    // Do not display scenario-00 until Start the Journey is clicked.
-    playHomeMusic();
   } else {
-    // If the landing page is absent, display the current scenario.
     updateScoreDisplay();
     showScenario(currentId);
   }
 
-  // Initialize the existing modals.
   initializeMemoryProfile();
   initializeScoreModal();
 
@@ -1429,9 +1250,7 @@ function initializeGame() {
 // START AFTER THE PAGE LOADS
 // ==========================================
 function startApplication() {
-  initializeMusicToggle();
   loadModals();
-  startHomeMusicAutomatically();
 }
 
 if (document.readyState === "loading") {
