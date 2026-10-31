@@ -40,6 +40,10 @@ window.memories = [
     dataType: "tabular",
     extensionType: "xls",
 
+    dateType: "file modification",
+    dateModified: "2002-10-13",
+    eventDetail: "Last modified timestamp extracted from the original file system metadata",
+
     // Preservation event information
     dateModified: "2026-11-05",
     transcode: "normalization",

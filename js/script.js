@@ -269,9 +269,9 @@ function showScenario(id) {
 
           if (!isCorrect) {
             errorMessage.textContent =
-              id === "scenario-19"
-                ? "That isn't quite right."
-                : "That isn't quite right. Try sending a smiley face!";
+              id === "scenario-05"
+                ? "That isn't quite right. Try sending a smiley face!" 
+                : "That isn't quite right. Try checking your memory profile.";
 
             errorMessage.hidden = false;
             input.focus();
@@ -959,6 +959,10 @@ function renderMemoryProfile() {
         ["premis:formatVersion", memory.formatVersion],
         ["premis:formatRegistryName", memory.formatRegistry],
         ["premis:formatRegistryKey", memory.puid],
+
+        ["premis:eventType", memory.dateType],
+        ["premis:eventDateTime", memory.dateModified],
+        ["premis:eventDetail", memory.eventDetail],
 
         ["premis:objectCategory", memory.dataType],
         ["premis:formatDesignation", memory.extensionType],

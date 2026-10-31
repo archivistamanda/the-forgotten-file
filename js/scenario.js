@@ -388,7 +388,7 @@ const scenarios = [
         points: 3,
         next: "scenario-09",
         feedback: [
-          "You find paper files in the cabinet that date back to the early 2000s. There is a sample collection manual for Project X by TX Tang that appears to have been updated multiple times. The most recent copy lists U Mann as the author of the most recent edition."
+          "You find paper files in the cabinet that date back to the early 2000s. There is a sample collection manual for Project X by TX Tang that appears to have been updated multiple times. The most recent copy lists U Mann as the author of the most recent edition. You close the manual and see the title: Sample Collection Manual - Project X."
         ],
       },
       {
@@ -397,7 +397,7 @@ const scenarios = [
         points: 3,
         next: "scenario-09",
         feedback: [
-          "The computer turns on. You find that it is not connected to the internet. There are locally saved spreadsheets and a lab procedures manual. Opening the manual, you find descriptions of the variables in columns of the spreadsheets. Is this what the columns of your own data mean? There are also instructions on what sample measurements and observations should go on sheet one, and which on sheet two in excel workbooks. There are older copies of instructions authored by TX Tang and newer files last modified by U Mann. You print a copy of this documentation and bring it with you."
+          "The computer turns on. You find that it is not connected to the internet. There are locally saved spreadsheets and a lab procedures manual. Opening the manual, you find descriptions of the variables in columns of the spreadsheets. Is this what the columns of your own data mean? There are also instructions on what sample measurements and observations should go on sheet one, and which on sheet two in excel workbooks. There are older copies of instructions authored by TX Tang and newer files last modified by U Mann. You close the manual and see the title: Sample Collection Manual - Project X. You print a copy of this documentation and bring it with you."
         ],
       },
     ],
@@ -494,7 +494,7 @@ const scenarios = [
         points: 3,
         next: "scenario-12",
         feedback: [
-          "You find paper files in the cabinet that date back to the early 2000s. There is a sample collection manual for Project X by TX Tang that appears to have been updated multiple times. The most recent copy lists U Mann as the author of the most recent edition."
+          "You find paper files in the cabinet that date back to the early 2000s. There is a sample collection manual for Project X by TX Tang that appears to have been updated multiple times. The most recent copy lists U Mann as the author of the most recent edition. You close the manual and see the title: Sample Collection Manual - Project X."
         ],
       },
       {
@@ -503,7 +503,7 @@ const scenarios = [
         points: 3,
         next: "scenario-12",
         feedback: [
-          "The computer turns on. You find that it is not connected to the internet. There are locally saved spreadsheets and a lab procedures manual. Opening the manual, you find descriptions of the variables in columns of the spreadsheets. Is this what the columns of your own data mean? There are also instructions on what sample measurements and observations should go on sheet one, and which on sheet two in excel workbooks. There are older copies of instructions authored by TX Tang and newer files last modified by U Mann. You print a copy of this documentation and bring it with you."
+          "The computer turns on. You find that it is not connected to the internet. There are locally saved spreadsheets and a lab procedures manual. Opening the manual, you find descriptions of the variables in columns of the spreadsheets. Is this what the columns of your own data mean? There are also instructions on what sample measurements and observations should go on sheet one, and which on sheet two in excel workbooks. There are older copies of instructions authored by TX Tang and newer files last modified by U Mann. You close the manual and see the title: Sample Collection Manual - Project X. You print a copy of this documentation and bring it with you."
         ],
       },
     ],
@@ -626,7 +626,7 @@ const scenarios = [
       },
       {
         id: "choice-14-02",
-        text: "Push the stranger away. You will not be taken advantage of. You can find help on your own.",
+        text: "Push the stranger away. You will not be taken advantage of. You can find help on your own",
         points: -100,
         next: "scenario-lose",
         feedback: [
@@ -871,6 +871,7 @@ const scenarios = [
           "Microsoft Excel 97-2003 Workbook, 2002-10-09",
           "Microsoft Excel 97-2003 Workbook 2002-10-09",
           "fmt/61, 2002-10-09",
+          "fmt/61 2002-10-09",
           "Microsoft Excel 97-2003 Workbook (XLS), 2002-10-09"
         ],
         points: 8,
@@ -1037,7 +1038,7 @@ const scenarios = [
       {
         id: "choice-24-01",
         text: "Accept the outcome",
-        points: -100,
+        points: -150,
         next: "scenario-lose"
       }
     ]
