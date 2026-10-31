@@ -103,7 +103,7 @@ const scenarios = [
       },
       {
         id: "choice-02-02",
-        text: "Leave. You are creeped out",
+        text: "Leave. You are creeped out.",
         points: -50,
         next: "scenario-03",
         feedback: [
@@ -675,9 +675,9 @@ const scenarios = [
       },
       {
         id: "choice-15-02",
-        text: "Flee the preservationist’s workshop. They’re mad! How could they think you’d risk losing yourself again?!",
-        points: -70,
-        next: "scenario-lose",
+        text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
+        points: -8,
+        next: "mem-03",
         setState: {
           normalized: false,
           hasTechnicalMetadata: false
@@ -735,9 +735,9 @@ const scenarios = [
       },
       {
         id: "choice-16-02",
-        text: "Flee the preservationist’s workshop. They’re mad! How could they think you’d risk losing yourself again?!",
-        points: -70,
-        next: "scenario-lose",
+        text: "Flee the preservationists’ workshop. They’re mad! How could they think you’d risk losing yourself again?!",
+        points: -8,
+        next: "mem-03",
         setState: {
           normalized: false,
           hasTechnicalMetadata: false
