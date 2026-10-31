@@ -893,9 +893,9 @@ function renderMemoryProfile () {
         ['premis:formatRegistryName', memory.formatRegistry],
         ['premis:formatRegistryKey', memory.puid],
 
-        ['premis:eventType', memory.dateType],
-        ['premis:eventDateTime', memory.dateModified],
-        ['premis:eventDetail', memory.eventDetail],
+        ['premis:eventType', memory.dateType1],
+        ['premis:eventDateTime', memory.dateModified1],
+        ['premis:eventDetail', memory.eventDetail1],
 
         ['premis:objectCategory', memory.dataType],
         ['premis:formatDesignation', memory.extensionType],
