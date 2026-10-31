@@ -78,7 +78,6 @@ function applyChoiceState (choice) {
 
   Object.assign(gameState, choice.setState)
 
-  console.log('Updated preservation state:', gameState)
 }
 
 // ==========================================
@@ -108,7 +107,6 @@ async function showScenario (id) {
   const scenario = scenarios.find(item => item.id === id)
 
   if (!scenario) {
-    console.error(`Scenario not found: ${id}`)
     return
   }
 
@@ -147,10 +145,6 @@ async function showScenario (id) {
     p.textContent = paragraph
     storyEl.appendChild(p)
   })
-
-  if (scenario.background && gamePage) {
-    gamePage.style.backgroundImage = `url("${scenario.background}")`
-  }
 
   choicesEl.replaceChildren()
 
@@ -211,14 +205,6 @@ async function showScenario (id) {
           choice.text.trim() === oppositeChoiceText)
     )
 
-    // console.log(
-    //   "Scenario 09 selected response:",
-    //   scenario6Choice
-    // );
-    // console.log(
-    //   "Scenario 09 choices displayed:",
-    //   choicesToDisplay.map(choice => choice.text)
-    // );
   }
 
   if (id === 'scenario-03') {
@@ -227,8 +213,7 @@ async function showScenario (id) {
       Math.min(currentChoiceIndex + 1, scenario.choices.length)
     )
   }
-
-  choicesToDisplay.forEach((choice, index) => {
+    choicesToDisplay.forEach((choice, index) => {
     // ==========================================
     // TEXT INPUT CHOICE
     // ==========================================
@@ -333,8 +318,6 @@ async function showScenario (id) {
             visitedWoods = true
           }
 
-          console.log('Building visited:', visitedBuilding)
-          console.log('Woods visited:', visitedWoods)
         }
         // Other scenarios allow only one answer
         if (id !== 'scenario-03') {
@@ -397,12 +380,6 @@ async function showScenario (id) {
         visitedWoods = true
       }
 
-      console.log('Location choice recorded:', {
-        scenario: scenarioId,
-        choice: choice.text,
-        visitedBuilding,
-        visitedWoods
-      })
     }
 
     // ==========================================
@@ -439,11 +416,6 @@ async function showScenario (id) {
 
       // handleChoice(choice);
       trackLocationChoice(choice, id)
-      console.log('BUTTON CLICKED:', {
-        scenario: id,
-        choiceId: choice.id,
-        choiceText: choice.text
-      })
 
       // Other scenarios allow only one answer
       if (!isScenario03 && answered) {
@@ -510,7 +482,6 @@ async function showScenario (id) {
     choicesEl.appendChild(button)
   })
 }
-
 // ==========================================
 // UPDATE SCORE
 // ==========================================
@@ -527,7 +498,6 @@ async function loadModals () {
   const modalContainer = document.getElementById('modal-container')
 
   if (!modalContainer) {
-    console.error('Missing element: #modal-container')
     return
   }
 
@@ -556,7 +526,6 @@ async function loadModals () {
     // Initialize controls only after the modal HTML exists.
     initializeGame()
   } catch (error) {
-    console.error('Error loading modals:', error)
   }
 }
 
@@ -569,7 +538,6 @@ function advanceScenario (choice, scenarioId) {
     const scenario03 = scenarios.find(item => item.id === 'scenario-03')
 
     if (!scenario03) {
-      console.error('Scenario 03 not found.')
       return
     }
 
@@ -628,9 +596,6 @@ function showResultModal (choice, scenarioId, playerAnswer = null) {
   const modalContinue = document.getElementById('modalContinueButton')
 
   if (!modalEl || !modalTitle || !modalBody || !modalScore || !modalContinue) {
-    console.error(
-      'Results modal elements are missing. Check modals/results.html.'
-    )
     return
   }
 
@@ -746,7 +711,7 @@ function showResultModal (choice, scenarioId, playerAnswer = null) {
     advanceScenario(choice, scenarioId)
   }
 
-  // Continue button only closes the modal.
+    // Continue button only closes the modal.
   // Scenario advancement happens when the modal finishes closing.
   modalContinue.onclick = () => {
     bootstrap.Modal.getOrCreateInstance(modalEl).hide()
@@ -768,7 +733,6 @@ function initializeScoreModal () {
   const responseList = document.getElementById('responseList')
 
   if (!scoreButton || !scoreModalElement || !totalScore || !responseList) {
-    console.error('Score modal elements are missing. Check modals/score.html.')
     return
   }
 
@@ -827,7 +791,6 @@ function renderMemoryProfile () {
   const memoryList = document.getElementById('memoryList')
 
   if (!memoryList) {
-    console.error('Memory list element not found.')
     return
   }
 
@@ -993,7 +956,6 @@ function unlockCompletedPreservationMemory () {
   )
 
   if (!completedMemory) {
-    console.error('Completed preservation memory not found.')
     return
   }
 
@@ -1005,15 +967,6 @@ function unlockCompletedPreservationMemory () {
   // Insert the complete preservation record.
   window.collectedMemories.push(completedMemory)
 
-  console.log('Preservation memory replaced:', {
-    remainingOriginal: window.collectedMemories.some(
-      memory => memory.id === 'mem-01'
-    ),
-    completedRecord: window.collectedMemories.find(
-      memory => memory.id === 'mem-03'
-    )
-  })
-
   renderMemoryProfile()
 }
 
@@ -1022,7 +975,6 @@ function unlockCompletedPreservationMemory () {
 // ==========================================
 function unlockDescriptiveMemory () {
   if (descriptiveMemoryLocked) {
-    console.log('Descriptive memory already locked.')
     return
   }
 
@@ -1036,14 +988,7 @@ function unlockDescriptiveMemory () {
     selectedMemoryId = 'mem-05'
   }
 
-  console.log('Selecting descriptive memory:', {
-    visitedBuilding,
-    visitedWoods,
-    selectedMemoryId
-  })
-
   if (!selectedMemoryId) {
-    console.error('No descriptive memory could be selected.')
     return
   }
 
@@ -1052,10 +997,6 @@ function unlockDescriptiveMemory () {
   )
 
   if (!selectedMemory) {
-    console.error(
-      'Descriptive memory not found in window.memories:',
-      selectedMemoryId
-    )
     return
   }
 
@@ -1068,9 +1009,6 @@ function unlockDescriptiveMemory () {
   window.collectedMemories.push(selectedMemory)
 
   descriptiveMemoryLocked = true
-
-  console.log('DESCRIPTIVE MEMORY UNLOCKED:', selectedMemory)
-  console.log('ALL COLLECTED MEMORIES:', window.collectedMemories)
 
   renderMemoryProfile()
 }
@@ -1098,13 +1036,13 @@ function unlockChapterMemories (scenarioId) {
 
   completedMemoryChapters.add(scenarioId)
 }
+
 function initializeMemoryProfile () {
   const openButton = document.getElementById('openMemoryProfileButton')
 
   const modalElement = document.getElementById('memoryProfileModal')
 
   if (!openButton || !modalElement) {
-    console.error('Memory profile button or modal not found.')
     return
   }
 
@@ -1191,7 +1129,7 @@ function initializeGame () {
 // START AFTER THE PAGE LOADS
 // ==========================================
 function startApplication () {
-  preloadAllBackgrounds();
+  preloadAllBackgrounds()
   loadModals()
 }
 
