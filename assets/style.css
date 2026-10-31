@@ -115,6 +115,7 @@ Backgrounds
   background-position: center center;
   background-repeat: no-repeat;
   min-height: 100vh;
+  background-color: var(--brand-disabled);
 }
 
 .home-page {
