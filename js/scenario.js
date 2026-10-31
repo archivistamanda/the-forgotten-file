@@ -30,10 +30,10 @@ const scenarios = [
       },
       {
         id: "choice-00-02",
-        text: "Leave. I just don't have capacity right now.",
-        points: 0,
+        text: "Leave. I just don't have capacity right now",
+        points: -100,
         next: "scenario-lose",
-        feedback: "You decide the file will be deprioritized. You are already overloaded with a backlog"
+        feedback: "You decide the file will be deprioritized. You are already overloaded with a backlog."
       }
     ]
   },
@@ -65,7 +65,7 @@ const scenarios = [
       {
         id: "choice-01-02",
         text: "Investigate the source of the sound",
-        points: 5,
+        points: 2,
         next: "scenario-02",
         feedback: [
           "A sigh of relief, it’s just the remains of a notepad that’s in even worse condition than you are, and something bright yellow is caught between the pages.",
@@ -104,7 +104,7 @@ const scenarios = [
       {
         id: "choice-02-02",
         text: "Leave. You are creeped out",
-        points: -50,
+        points: -100,
         next: "scenario-03",
         feedback: [
           "You take a step back and decide this is just too weird. I'm talking to a computer. You decide to walk away.",
@@ -531,7 +531,7 @@ const scenarios = [
       {
         id: "choice-12-02",
         text: "Stop",
-        points: -60,
+        points: -100,
         next: "scenario-lose",
         feedback: [
           "You decide you know enough. You’re going to rest here with files on the lab computers."
@@ -572,7 +572,7 @@ const scenarios = [
       {
         id: "choice-13-01",
         text: "Try to push through the illness and carry on walking",
-        points: -50,
+        points: -100,
         next: "scenario-lose",
         feedback: [
           "As the days roll by, your illness worsens. Your speech begins to slur, and your appearance becomes unrecognizable. Perhaps you should have sought help after all. Unable to continue walking, you lie down by the side of the road and close your eyes. As your sense of self slowly slips away, you hear a voice: “What a terrible case of bitrot, you poor soul. If only I'd found you sooner.” You succumb to the darkness."
@@ -582,7 +582,7 @@ const scenarios = [
       {
         id: "choice-13-02",
         text: "Stop and rest for the evening. “Maybe I'll feel better in the morning!”",
-        points: -50,
+        points: -100,
         next: "scenario-lose",
         feedback: [
           "When you wake up, your illness has worsened. Your speech is slurred, and your reflection has become unrecognizable. Perhaps you should have sought help after all. Unable to continue your journey, you lie down beside the pond and close your eyes. As your sense of self slowly slips away, you hear a voice: “What a terrible case of bitrot, you poor soul. If only I'd found you sooner.” You succumb to the darkness."
@@ -627,7 +627,7 @@ const scenarios = [
       {
         id: "choice-14-02",
         text: "Push the stranger away. You will not be taken advantage of. You can find help on your own.",
-        points: -50,
+        points: -100,
         next: "scenario-lose",
         feedback: [
           "Your illness worsens. Your speech begins to slur, your appearance shifts to one that is unrecognizable. Perhaps you should have sought help after all.",
@@ -785,7 +785,7 @@ const scenarios = [
       {
         id: "choice-17-01",
         text: "Yes, I have",
-        points: 8,
+        points: 5,
         next: "scenario-18",
         feedback: ['"Very well. To be granted eternal life, you must demonstrate that you can be identified, understood, accessed, and trusted in the future."',
           '"You must present the documentation and metadata gathered during your journey and demonstrate what preservation measures have been taken."',
@@ -795,7 +795,7 @@ const scenarios = [
       {
         id: "choice-17-02",
         text: "No, this was a mistake",
-        points: -50,
+        points: -100,
         next: "scenario-lose",
         feedback: "Overcome with doubt, you leave the Castle and decide to take your chances living your natural lifespan. Over the years you lose track of the items you gained on your quest. Your technical metadata gets misplaced, your normalized version decides to leave and start their own life, and you slowly forget your identity. Eventually you end up where you began, confused and degrading, and without the mechanisms to protect your identity and integrity in place, you slowly lose your ability to be understood. You slip away into darkness."
       },
@@ -873,7 +873,7 @@ const scenarios = [
           "fmt/61, 2002-10-09",
           "Microsoft Excel 97-2003 Workbook (XLS), 2002-10-09"
         ],
-        points: 10,
+        points: 8,
         next: "scenario-20",
         setState: {
           knowsFileFormat: true,
@@ -924,7 +924,7 @@ const scenarios = [
           "Comma Separated Values",
           "Comma Separated Values (csv)",
         ],
-        points: 10,
+        points: 8,
         next: "scenario-21",
         feedback: "Excellent. Proceed through the door for your final assessment.",
       },
@@ -944,8 +944,6 @@ const scenarios = [
       },
     ]
   },
-
-
   {
     id: "scenario-21",
     chapter: "Chapter IV: The Trials of Eternal Life",
@@ -961,7 +959,7 @@ const scenarios = [
       {
         id: "choice-21-01",
         text: "Submit my preservation package for assessment",
-        points: 5,
+        points: 0,
         next: "scenario-22",
         feedback: [
           "The Keeper raises their staff. Your collected information begins to glow as the assessment commences."
@@ -986,6 +984,7 @@ const scenarios = [
       {
         id: "choice-22-01",
         text: "Welcome to eternal life",
+        points: 0,
         next: "scenario-win",
       }
     ]
@@ -1038,7 +1037,7 @@ const scenarios = [
       {
         id: "choice-24-01",
         text: "Accept the outcome",
-        points: 0,
+        points: -100,
         next: "scenario-lose"
       }
     ]
