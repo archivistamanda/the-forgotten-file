@@ -1,4 +1,7 @@
 # The Forgotten File
+Play [The Forgotten File: The Journey to the Castle of Preservation](https://archivistamanda.github.io/the-forgotten-file/)
+
+---
 *The Forgotten File: The Journey to the Castle of Preservation* was developed in recognition of World Digital Preservation Day 2026 and its theme, [Save Our Stories (SOS): Our Digital Heritage in Danger.](https://www.dpconline.org/events/world-digital-preservation-day) Through the story of a lost and forgotten file embarking on a journey to the Castle of Preservation, this narrative seeks to raise awareness of the importance of safeguarding our digital heritage and the stories, knowledge, and memories it contains. In an increasingly digital world, files and records can easily become lost, inaccessible, corrupted, or forgotten as technologies evolve and become obsolete.
 
 By personifying a digital file and portraying its journey toward preservation, the story highlights the importance of context and the crucial role it plays in determining preservation pathways. It equally conveys the challenges and significance of protecting digital information for future generations. Ultimately, it reminds us that digital files have a story worth saving and that preserving our digital heritage is a shared responsibility.
