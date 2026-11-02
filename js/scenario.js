@@ -100,7 +100,7 @@ const scenarios = [
         feedback: [
           'You open your mouth, and then close it. Open and close. You had so many questions just a moment ago, but now your memory is blank. Clearing your throat, you manage a weak “Who are you?”',
 
-          'A soft echo whispers your question back at you followed by silence. You cringe, okay, what did you really expect? Of course a computer requires keyboard a input.'
+          'A soft echo whispers your question back at you followed by silence. You cringe, okay, what did you really expect? Of course a computer requires a keyboard input.'
         ]
       },
       {
