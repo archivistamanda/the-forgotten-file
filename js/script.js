@@ -920,7 +920,13 @@ function renderMemoryProfile () {
     }
 
     card.appendChild(body)
-    memoryList.appendChild(card)
+
+    // Always place completed preservation metadata (mem-03) first.
+    if (memory.id === 'mem-03') {
+      memoryList.prepend(card)
+    } else {
+      memoryList.appendChild(card)
+    }
   })
 }
 
