@@ -791,21 +791,15 @@ function renderMemoryProfile () {
 
   memoryList.replaceChildren()
 
-  // const memories = window.collectedMemories || []
+  const memories = window.collectedMemories || []
 
-  // if (memories.length === 0) {
-  //   const emptyMessage = document.createElement('p')
-  //   emptyMessage.className = 'text-muted'
-  //   emptyMessage.textContent = 'No memories collected yet.'
-  //   memoryList.appendChild(emptyMessage)
-  //   return
-  // }
-  // Always display completed preservation metadata (mem-03) first.
-  const memories = [...(window.collectedMemories || [])].sort((a, b) => {
-    if (a.id === 'mem-03') return -1
-    if (b.id === 'mem-03') return 1
-    return 0
-  })
+  if (memories.length === 0) {
+    const emptyMessage = document.createElement('p')
+    emptyMessage.className = 'text-muted'
+    emptyMessage.textContent = 'No memories collected yet.'
+    memoryList.appendChild(emptyMessage)
+    return
+  }
 
   memories.forEach(memory => {
     const card = document.createElement('div')
