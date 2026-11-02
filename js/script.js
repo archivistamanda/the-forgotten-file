@@ -77,7 +77,6 @@ function applyChoiceState (choice) {
   if (!choice.setState) return
 
   Object.assign(gameState, choice.setState)
-
 }
 
 // ==========================================
@@ -204,7 +203,6 @@ async function showScenario (id) {
         (oppositeChoiceText !== null &&
           choice.text.trim() === oppositeChoiceText)
     )
-
   }
 
   if (id === 'scenario-03') {
@@ -213,7 +211,7 @@ async function showScenario (id) {
       Math.min(currentChoiceIndex + 1, scenario.choices.length)
     )
   }
-    choicesToDisplay.forEach((choice, index) => {
+  choicesToDisplay.forEach((choice, index) => {
     // ==========================================
     // TEXT INPUT CHOICE
     // ==========================================
@@ -317,7 +315,6 @@ async function showScenario (id) {
           if (selectedText.includes('woods')) {
             visitedWoods = true
           }
-
         }
         // Other scenarios allow only one answer
         if (id !== 'scenario-03') {
@@ -379,7 +376,6 @@ async function showScenario (id) {
       ) {
         visitedWoods = true
       }
-
     }
 
     // ==========================================
@@ -525,8 +521,7 @@ async function loadModals () {
 
     // Initialize controls only after the modal HTML exists.
     initializeGame()
-  } catch (error) {
-  }
+  } catch (error) {}
 }
 
 // ==========================================
@@ -711,7 +706,7 @@ function showResultModal (choice, scenarioId, playerAnswer = null) {
     advanceScenario(choice, scenarioId)
   }
 
-    // Continue button only closes the modal.
+  // Continue button only closes the modal.
   // Scenario advancement happens when the modal finishes closing.
   modalContinue.onclick = () => {
     bootstrap.Modal.getOrCreateInstance(modalEl).hide()
@@ -796,15 +791,21 @@ function renderMemoryProfile () {
 
   memoryList.replaceChildren()
 
-  const memories = window.collectedMemories || []
+  // const memories = window.collectedMemories || []
 
-  if (memories.length === 0) {
-    const emptyMessage = document.createElement('p')
-    emptyMessage.className = 'text-muted'
-    emptyMessage.textContent = 'No memories collected yet.'
-    memoryList.appendChild(emptyMessage)
-    return
-  }
+  // if (memories.length === 0) {
+  //   const emptyMessage = document.createElement('p')
+  //   emptyMessage.className = 'text-muted'
+  //   emptyMessage.textContent = 'No memories collected yet.'
+  //   memoryList.appendChild(emptyMessage)
+  //   return
+  // }
+  // Always display completed preservation metadata (mem-03) first.
+  const memories = [...(window.collectedMemories || [])].sort((a, b) => {
+    if (a.id === 'mem-03') return -1
+    if (b.id === 'mem-03') return 1
+    return 0
+  })
 
   memories.forEach(memory => {
     const card = document.createElement('div')
